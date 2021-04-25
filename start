@@ -2,15 +2,33 @@
 
 clear
 echo "Welcome to TheGuildScript-TGS-V1.0"
+
+if [ -e $HOME/TGS/data.json ]
+then
+echo "Welcome back $(cat $HOME/TGS/data.json | jq '.[0].name')\n How can i serve You?"
+else
+mkdir $HOME/TGS
+echo "Welcome Chosen One\nI must ask you some question\nWhat is your name? I will use this name as node name, if this will be necessary\nPls enter your name and press Enter"
+read $name
+echo "$name ok, do you want install firewall UFW for better secure?\n(Yes/No)"
+read $action
+case "$action" in 
+Yes )
+;;
+No )
+;;
+* ) echo "Pls type \033[33mYes\033[0m or \033[33mNo\033[0m";;
+fi
+
 echo
 echo -e " Psl choose your action; \n 1 - init; \n 2 - install node; \n 3 - upgrade node \n\n \033[33m Press 1 if this is first launch\033[0m"
 read action
+
 case "$action" in
-  1 ) echo "TO-DO установка зависимостей";;
+  1 )
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/init | bash
+;;
   2 ) echo "ToDo";;
   3 ) echo "Цифра";;
   * ) echo "Ничего не выбрано";;
 esac
-
-
-
