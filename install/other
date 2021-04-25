@@ -1,9 +1,6 @@
 echo ${ufwPort[*]}
 echo $name
-echo "FFOF"
-
-
-
+echo "FFO"
 sudo apt update && apt upgrade -y
 sudo apt install make clang pkg-config libssl-dev build-essential git curl ntp jq llvm -y < "/dev/null"
 sudo apt install ufw glances -y
