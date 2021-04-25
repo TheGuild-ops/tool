@@ -45,7 +45,7 @@ echo "Please, enter Y(yes) or N(no)! "
 esac
 done
 echo $name
-echo '[]' | jq '. +[{"name":"'$name'","ufwStatus":"'$ufwStatus'"}]' >  $HOME/TGS/data.json
+echo '[]' | jq '. +[{"name":"'$name'","ufwStatus":"'$ufwStatus'","ufwPort":[${ufwPort[*]}]}]' >  $HOME/TGS/data.json
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/init | bash
 
 fi
