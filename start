@@ -1,0 +1,16 @@
+#!/bin/bash
+
+clear
+echo "Welcome to TheGuildScript-TGS-V1.0"
+echo
+echo -e " Psl choose your action; \n 1 - init; \n 2 - install node; \n 3 - upgrade node \n\n \033[33m Press 1 if this is first launch\033[0m"
+read action
+case "$action" in
+  1 ) echo "TO-DO установка зависимостей";;
+  2 ) echo "ToDo";;
+  3 ) echo "Цифра";;
+  * ) echo "Ничего не выбрано";;
+esac
+
+
+
