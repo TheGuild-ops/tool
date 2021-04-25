@@ -1,0 +1,5 @@
+
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/other | bash
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/docker | bash
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/go | bash
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/rust | bash
