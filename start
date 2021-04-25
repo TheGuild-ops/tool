@@ -16,24 +16,24 @@ echo -e "$name ok, do you want install firewall UFW for better secure?\n(Yes/No)
 while read response; do
 case $response in
     [yY][eE][sS]|[yY])
-    echo "What port you want open?"
-    while read port; do
-    case $port in
-    [0-9])
-    ufwPort+=($port)
-    echo ufwPort
-    clear
-    sudo netstat -tulpn
-    echo -e '$port will be open\nType "(d)one" if you finish, or enter another port'
-    ;;
-    [dD][oO][nN][eE]|[dD])
-        break
-        ;;
-     *)
-echo "Note a number type done if you finish"
+ echo "What port you want open?"
+  while read port; do
+     case $port in
+      *[0-9]*)
+       ufwPort+=($port)
+       clear
+       sudo netstat -tulpn
+       echo -e $port' will be open\nType "(d)one" if you finish, or enter another port'
+       echo ${ufwPort[*]} "will be opened"
+       echo "enter another"
+      ;;
+      [dD][oO][nN][eE]|[dD])
+       break
+       ;;
+      *) echo "Note a number type (d)one if you finish, or enter another port"
 esac
 done
-        ufwStatus=enable
+ufwStatus=enable
         break
         ;;
     [nN][oO]|[nN])
@@ -46,7 +46,7 @@ esac
 done
 echo $name
 echo '[]' | jq '. +[{"name":"'$name'","ufwStatus":"'$ufwStatus'"}]' >  $HOME/TGS/data.json
-#curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/init | bash
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/init | bash
 
 fi
 
