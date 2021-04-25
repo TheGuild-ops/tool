@@ -16,6 +16,23 @@ echo -e "$name ok, do you want install firewall UFW for better secure?\n(Yes/No)
 while read response; do
 case $response in
     [yY][eE][sS]|[yY])
+    echo "What port you want open?"
+    while read port; do
+    case $port in
+    [0-9])
+    ufwPort+=($port)
+    echo ufwPort
+    clear
+    sudo netstat -tulpn
+    echo -e '$port will be open\nType "(d)one" if you finish, or enter another port'
+    ;;
+    [dD][oO][nN][eE]|[dD])
+        break
+        ;;
+     *)
+echo "Note a number type done if you finish"
+esac
+done
         ufwStatus=enable
         break
         ;;
