@@ -1,4 +1,4 @@
-rm install
+rm node
 clear
 echo -e "Good choise\nWhat project do you want?"
 echo "1 - Aleo - 🦄"
@@ -9,8 +9,8 @@ while read response
   case $response in
   [1])
 
-   break
-   wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/install && bash install
+    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/node | bash node
+    break
   ;;
   [dD][oO][nN][eE]|[dD])
    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/start && bash start
