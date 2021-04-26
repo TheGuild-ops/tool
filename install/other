@@ -1,3 +1,6 @@
 sudo apt update && apt upgrade -y
 sudo apt install make clang pkg-config libssl-dev build-essential git curl ntp jq llvm -y < "/dev/null"
 sudo apt install glances -y
+echo "we open"
+echo ${arr[*]}
+echo "port"
