@@ -12,25 +12,16 @@ echo -e "Welcome to TheGuildScript-TGS-V1.0 Chosen One\
 \nI must ask you some question\
 \nWhat is your name? I will use this name as node name, if this will be necessary\nPls enter your name and press Enter"
 read name
-echo -e "$name ok, do you want install firewall UFW for better secure?\n(Yes/No)"
+echo -e "Good work $name, do you want install firewall UFW for better secure?\n(Yes/No)"
 while read response; do
 case $response in
     [yY][eE][sS]|[yY])
- echo "What port you want open?"
-  while read port; do
-     case $port in
-      *[0-9]*)
-       ufwPort+=($port)
-       clear
-       sudo netstat -tulpn
-       echo -e $port' will be open\nType "(d)one" if you finish, or enter another port'
-       echo ${ufwPort[*]} "will be opened"
-       echo "enter another"
-      ;;
-      [dD][oO][nN][eE]|[dD])
-       break
-       ;;
-      *) echo "Note a number type (d)one if you finish, or enter another port"
+        curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall | sudo bash
+    ;;
+    [dD][oO][nN][eE]|[dD])
+        break
+     ;;
+     *) echo "Note a number type (d)one if you finish, or enter another port"
 esac
 done
 ufwStatus=enable
@@ -58,4 +49,3 @@ case "$action" in
   2 ) echo "Цифра";;
   * ) echo "Ничего не выбрано";;
 esac
-
