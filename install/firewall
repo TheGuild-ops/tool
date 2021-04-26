@@ -4,5 +4,6 @@ for port in ${arr[@]}; do
 echo "add port $port"
 sudo ufw allow $port
 done
-echo y | sudo ufw enable
+sudo ufw enable
+echo y
 echo ${arr[*]}
