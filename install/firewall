@@ -6,4 +6,6 @@ sudo ufw allow $port
 done
 sudo ufw enable
 echo y
+echo "Port"
 echo ${arr[*]}
+echo "added"
