@@ -9,7 +9,7 @@ while read response
   case $response in
   [1])
 
-    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/node | bash node
+    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/node && bash node
     break
   ;;
   [dD][oO][nN][eE]|[dD])
