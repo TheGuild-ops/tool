@@ -19,9 +19,10 @@ while read response
   [yY][eE][sS]|[yY])
    curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall | sudo bash
    ufwStatus=enable
+   break
   ;;
   [dD][oO][nN][eE]|[dD])
-  break
+   break
   ;;
   [nN][oO]|[nN])
    ufwStatus=disable
@@ -33,7 +34,7 @@ while read response
 esac
 done
 echo $name
-echo '[]' | jq '. +[{"name":"'$name'","ufwStatus":"'$ufwStatus'","ufwPort":[${ufwPort[*]}]}]' >  $HOME/TGS/data.json
+echo '[]' | jq '. +[{"name":"'$name'","ufwStatus":"'$ufwStatus'"}]' >  $HOME/TGS/data.json
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/init | bash
 fi
 echo -e " Psl choose your action; \n 1 - install node; \n 2 - upgrade node \n"
