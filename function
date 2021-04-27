@@ -1,0 +1,9 @@
+function portAssign {
+port=$((10000 + $RANDOM % 100000))
+if [  $(ss -lntu | grep -q $port) ]; then
+ echo $port
+ portAssign
+else
+echo $port
+fi
+}
