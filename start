@@ -37,6 +37,7 @@ echo $name
 echo '[]' | jq '. +[{"name":"'$name'","ufwStatus":"'$ufwStatus'"}]' >  $HOME/TGS/data.json
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/init | bash
 fi
+clear
 echo -e " Psl choose your action; \n 1 - install node; \n 2 - upgrade node \n"
 read action
 
