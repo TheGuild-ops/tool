@@ -1,22 +1,36 @@
 rm node
 clear
 echo -e "Good choise\nWhat project do you want?"
-echo "1 - Aleo - 🦄"
+echo "[1] - Polkadot -  🦄"
+echo "[2] - Kusama -    🦄"
+echo "[3] - Aleo -      🦄"
+echo "[e] - Come back -             🦄🦄🦄🦄🦄"
+echo "[0] - Lets Rock install all - 🦄🦄🦄🦄🦄"
+
+echo "       🦄🦄🦄🦄🦄"
+echo "        🦄🦄🦄🦄"
+echo "         🦄🦄🦄"
+echo "       🦄🦄🦄🦄🦄"
+echo "           🦄🦄"
 
 echo -e "Please choose carefully"
+
 while read response 
  do
   case $response in
-  [1])
-
+   [0])
     wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/node && bash node
     break
-  ;;
-  [dD][oO][nN][eE]|[dD])
+   ;;
+   [1])
+    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/node && bash node
+    break
+   ;;
+   [dD][oO][nN][eE]|[dD])
    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/start && bash start
    break
-  ;;
-  *)
+   ;;
+   *)
    echo "one more try"
    echo "use number"
   ;;
