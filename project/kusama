@@ -1,0 +1,76 @@
+#!/bin/bash
+
+projectName=kusama
+projectChain=kusama
+mkdir /root/TGS/source
+mkdir /root/TGS/data
+mkdir /root/TGS/data/$projectName/
+mkdir /root/TGS/bin/
+
+function portAssign {
+port=$((10000 + $RANDOM % 100000))
+if [  $(ss -lntu | grep -q $port) ]; then
+ echo $port
+ portAssign
+else
+echo $port
+fi
+}
+
+projectWsPort=$(portAssign)
+projectPort=$(portAssign)
+projectRpcPort=$(portAssign)
+if [  $projectWsPort==$projectPort ]; then
+: $((projectWsPort = $projectWsPort + 1))
+fi
+
+if [  $projectWsPort==$projectRpcPort ]; then
+: $((projectWsPort = $projectWsPort + 1))
+fi
+
+if [  $projectPort==$projectRpcPort ]; then
+: $((projectPort = $projectPort + 1))
+fi
+
+cat <<EOF > /etc/systemd/system/$projectName.service
+[Unit]
+Description=$projectName node service
+Wants=network-online.target
+After=network-online.target
+[Service]
+User=root
+Type=simple
+WorkingDirectory=/root/TGS/bin/
+Restart=always
+RestartSec=10
+ExecStart=/root/TGS/bin/$projectName \
+ --chain $projectChain \
+ --validator \
+ --port=$projectPort \
+ --ws-port=$projectWsPort \
+ --rpc-port=$projectRpcPort \
+ --name $(cat /root/TGS/data.json | jq ".[0].name") \
+ --base-path=/root/TGS/data/kusama/ \
+ --telemetry-url 'wss://telemetry-backend.w3f.community/submit 1'\
+ --telemetry-url 'wss://telemetry.polkadot.io/submit/ 0'\
+ --wasm-execution Compiled
+[Install]
+WantedBy=multi-user.target
+EOF
+cd /root/TGS/source
+git clone https://github.com/paritytech/polkadot.git
+cd polkadot
+git pull
+./scripts/init.sh
+cargo build --release
+systemctl stop kusama
+cp /root/TGS/source/polkadot/target/release/polkadot /root/TGS/bin/$projectName
+systemctl daemon-reload
+systemctl enable kusama
+systemctl start kusama
+ufw allow $projectPort
+ufw allow $projectWsPort
+ufw allow $projectRpcPort
+echo $(cat /root/TGS/data.json | jq '. + [{"projectName": "'$projectName'","status": "enable","projectChain": "'$projectChain'","projectWsPort": "'$projectWsPort'","projectPort": "'$projectPort'","projectRpcPort": "'$projectRpcPort'"}]') > /root/TGS/data.json 
+
+cat /etc/systemd/system/$projectName.service
