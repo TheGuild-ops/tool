@@ -1,13 +1,13 @@
 #!/bin/bash
 
+mkdir $HOME/TGS
+sudo su -y
 clear
 rm start
 if [ -s $HOME/TGS/data.json ]
 then
 echo -e "Welcome back $(cat $HOME/TGS/data.json | jq '.[0].name')\n How can i serve You?"
 else
-mkdir $HOME/TGS
-clear
 echo -e "Welcome to TheGuildScript-TGS-V1.0 Chosen One\
 \nI must ask you some question\
 \nWhat is your name? I will use this name as node name, if this will be necessary\nPls enter your name and press Enter"
