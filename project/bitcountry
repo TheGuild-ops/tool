@@ -1,6 +1,6 @@
 #!/bin/bash
 
-projectName= bitCountry
+projectName=bitCountry
 projectChain=bitCountry
 mkdir /root/TGS/source
 mkdir /root/TGS/data
