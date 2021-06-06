@@ -26,7 +26,7 @@ while read response
     break
    ;;
    [4])
-    curl https://raw.githubusercontent.com/TheGuild-ops/project/main/bitcountry/install | bash
+    curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/bitcountry | bash
     break
    ;;
    [dD][oO][nN][eE]|[dD])
