@@ -1,0 +1,77 @@
+#!/bin/bash
+
+projectName= bitCountry
+projectChain=bitCountry
+mkdir /root/TGS/source
+mkdir /root/TGS/data
+mkdir /root/TGS/data/$projectName/
+mkdir /root/TGS/bin/
+
+function portAssign {
+port=$((10000 + $RANDOM % 100000))
+if [  $(ss -lntu | grep -q $port) ]; then
+ echo $port
+ portAssign
+else
+echo $port
+fi
+}
+
+projectWsPort=$(portAssign)
+projectPort=$(portAssign)
+projectRpcPort=$(portAssign)
+if [  $projectWsPort==$projectPort ]; then
+: $((projectWsPort = $projectWsPort + 1))
+fi
+
+if [  $projectWsPort==$projectRpcPort ]; then
+: $((projectWsPort = $projectWsPort + 1))
+fi
+
+if [  $projectPort==$projectRpcPort ]; then
+: $((projectPort = $projectPort + 1))
+fi
+
+cd /root/TGS/source
+
+git clone https://github.com/bit-country/Bit-Country-Blockchain.git
+cd Bit-Country-Blockchain
+git checkout bfece87795f3b4bd4be225989af2ed717fbf9f8c
+curl https://sh.rustup.rs -sSf | sh
+./scripts/init.sh
+cargo build --release --features=with-bitcountry-runtime
+sudo apt install cmake git clang libclang-dev build-essential
+cp ./target/release/bitcountry-node /root/TGS/bin/$projectName
+
+
+cat <<EOF > /etc/systemd/system/$projectName.service
+[Unit]
+Description=$projectName node service
+Wants=network-online.target
+After=network-online.target
+[Service]
+User=root
+Type=simple
+WorkingDirectory=/root/TGS/bin/
+Restart=always
+RestartSec=10
+ExecStart=/root/TGS/bin/$projectName \
+--chain tewai \
+--validator \
+--name $(cat /root/TGS/data.json | jq ".[0].name") \
+--bootnodes /ip4/13.239.118.231/tcp/30344/p2p/12D3KooW9rDqyS5S5F6oGHYsmFjSdZdX6HAbTD88rPfxYfoXJdNU \
+--telemetry-url 'wss://telemetry.polkadot.io/submit/ 0'
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl stop $projectName
+systemctl daemon-reload
+systemctl enable $projectName
+systemctl start $projectName
+ufw allow $projectPort
+ufw allow $projectWsPort
+ufw allow $projectRpcPort
+echo $(cat /root/TGS/data.json | jq '. + [{"projectName": "'$projectName'","status": "enable","projectChain": "'$projectChain'","projectWsPort": "'$projectWsPort'","projectPort": "'$projectPort'","projectRpcPort": "'$projectRpcPort'"}]') > /root/TGS/data.json 
+
+cat /etc/systemd/system/$projectName.service
