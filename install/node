@@ -4,14 +4,9 @@ echo -e "Good choise\nWhat project do you want?"
 echo "[1] - Polkadot -  🦄"
 echo "[2] - Kusama -    🦄"
 echo "[3] - Aleo -      🦄"
+echo "[4] - bit.country -      🦄"
 echo "[e] - Come back -             🦄🦄🦄🦄🦄"
 echo "[0] - Lets Rock install all - 🦄🦄🦄🦄🦄"
-
-echo "       🦄🦄🦄🦄🦄"
-echo "        🦄🦄🦄🦄"
-echo "         🦄🦄🦄"
-echo "       🦄🦄🦄🦄🦄"
-echo "           🦄🦄"
 
 echo -e "Please choose carefully"
 
@@ -30,7 +25,10 @@ while read response
     curl https://raw.githubusercontent.com/TheGuild-ops/project/main/kusama/install | bash
     break
    ;;
-
+   [4])
+    curl https://raw.githubusercontent.com/TheGuild-ops/project/main/bitcountry/install | bash
+    break
+   ;;
    [dD][oO][nN][eE]|[dD])
    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/start && bash start
    break
