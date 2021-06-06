@@ -23,27 +23,24 @@ projectRpcPort=$(portAssign)
 if [  $projectWsPort==$projectPort ]; then
 : $((projectWsPort = $projectWsPort + 1))
 fi
-
 if [  $projectWsPort==$projectRpcPort ]; then
 : $((projectWsPort = $projectWsPort + 1))
 fi
-
 if [  $projectPort==$projectRpcPort ]; then
 : $((projectPort = $projectPort + 1))
 fi
 
 cd /root/TGS/source
-
 git clone https://github.com/bit-country/Bit-Country-Blockchain.git
 cd Bit-Country-Blockchain
 git checkout bfece87795f3b4bd4be225989af2ed717fbf9f8c
 curl https://sh.rustup.rs -sSf | sh
 ./scripts/init.sh
 source $HOME/.cargo/env
+sudo apt install cmake git clang libclang-dev build-essential -y
 cargo build --release --features=with-bitcountry-runtime
-sudo apt install cmake git clang libclang-dev build-essential
-cp ./target/release/bitcountry-node /root/TGS/bin/$projectName
 
+cp ./target/release/bitcountry-node /root/TGS/bin/$projectName
 
 cat <<EOF > /etc/systemd/system/$projectName.service
 [Unit]
