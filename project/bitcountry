@@ -39,6 +39,7 @@ cd Bit-Country-Blockchain
 git checkout bfece87795f3b4bd4be225989af2ed717fbf9f8c
 curl https://sh.rustup.rs -sSf | sh
 ./scripts/init.sh
+source $HOME/.cargo/env
 cargo build --release --features=with-bitcountry-runtime
 sudo apt install cmake git clang libclang-dev build-essential
 cp ./target/release/bitcountry-node /root/TGS/bin/$projectName
