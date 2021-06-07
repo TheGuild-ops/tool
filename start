@@ -3,6 +3,7 @@
 mkdir $HOME/TGS
 mkdir run
 cd run
+apt install ufw
 apt-get update && apt-get upgrade -y
 sudo su -y
 clear
