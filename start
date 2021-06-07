@@ -3,11 +3,11 @@
 mkdir $HOME/TGS
 mkdir run
 cd run
+rm start*
 apt install ufw
 apt-get update && apt-get upgrade -y
 sudo su -y
 clear
-rm start
 if [ -s $HOME/TGS/data.json ]
 then
 echo -e "Welcome back $(cat $HOME/TGS/data.json | jq '.[0].name')\n How can i serve You?"
