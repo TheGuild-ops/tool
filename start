@@ -1,6 +1,9 @@
 #!/bin/bash
 
 mkdir $HOME/TGS
+mkdir run
+cd run
+apt-get update && apt-get upgrade -y
 sudo su -y
 clear
 rm start
