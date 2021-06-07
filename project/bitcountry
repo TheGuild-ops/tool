@@ -56,6 +56,9 @@ RestartSec=10
 ExecStart=/root/TGS/bin/$projectName \
 --chain tewai \
 --validator \
+--port=$projectPort \
+--ws-port=$projectWsPort \
+--rpc-port=$projectRpcPort \
 --name $(cat /root/TGS/data.json | jq ".[0].name") \
 --bootnodes /ip4/13.239.118.231/tcp/30344/p2p/12D3KooW9rDqyS5S5F6oGHYsmFjSdZdX6HAbTD88rPfxYfoXJdNU \
 --telemetry-url 'wss://telemetry.polkadot.io/submit/ 0'
