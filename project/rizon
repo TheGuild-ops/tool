@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install git curl build-essential jq -y
 sudo rm -rf /usr/local/go
@@ -10,6 +11,14 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 EOF
 source $HOME/.profile
 go version
+
+projectName=rizon
+
+mkdir /root/TGS/source
+mkdir /root/TGS/data
+mkdir /root/TGS/data/$projectName/
+mkdir /root/TGS/bin/
+cd /root/TGS/source
 git clone https://github.com/rizon-world/rizon.git && cd rizon
 git fetch && git checkout v0.1.0
 make install
@@ -20,13 +29,13 @@ mv genesis.json $HOME/.rizon/config
 sed -i 's/minimum-gas-prices = ""/minimum-gas-prices = "0.0001uatolo"/g' $HOME/.rizon/config/app.toml
 sed -i 's/seeds = ""/seeds = "bad95d276696706c4df2272d45395d7da4a13f43@13.124.50.97:26656,08c0e4c197a0607a9832f9b365d07cef9b04a859@3.34.181.126:26656,34cec0c4ada4cd7f8ad26c457d604edc0eff3cb0@13.124.253.195:26656,72016f93daf677147c5d1d2625273dde61ae2d0a@3.34.5.208:26656"/g' $HOME/.rizon/config/config.toml
 
-sudo tee <<EOF >/dev/null /etc/systemd/system/rizond.service
+sudo tee <<EOF >/dev/null /etc/systemd/system/$projectName.service
 [Unit]
 Description=Rizon Node
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=$HOME/go/bin/rizond start
+ExecStart=/root/TGS/bin/$projectName/ start
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
