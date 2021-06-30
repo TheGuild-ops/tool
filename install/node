@@ -5,6 +5,7 @@ echo "[1] - Polkadot -  🦄"
 echo "[2] - Kusama -    🦄"
 echo "[3] - Aleo -      🦄"
 echo "[4] - bit.country -      🦄"
+echo "[5] - rizon -      🦄"
 echo "[e] - Come back -             🦄🦄🦄🦄🦄"
 echo "[0] - Lets Rock install all - 🦄🦄🦄🦄🦄"
 
@@ -29,6 +30,11 @@ while read response
     curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/bitcountry | bash
     break
    ;;
+    [5])
+    curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/rizon | bash
+    break
+   ;;
+   
    [dD][oO][nN][eE]|[dD])
    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/start && bash start
    break
