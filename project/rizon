@@ -1,5 +1,9 @@
 #!/bin/bash
 rm rizon*
+ufw allow 26656
+ufw allow 26657
+ufw allow 26655
+
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install git curl build-essential jq -y
 sudo rm -rf /usr/local/go
@@ -28,7 +32,7 @@ $HOME/go/bin/rizond init $NICKNAME --chain-id adora
 wget https://raw.githubusercontent.com/rizon-world/testnet/master/genesis.json 
 mv genesis.json $HOME/.rizon/config
 sed -i 's/minimum-gas-prices = ""/minimum-gas-prices = "0.0001uatolo"/g' $HOME/.rizon/config/app.toml
-sed -i 's/seeds = ""/seeds = "bad95d276696706c4df2272d45395d7da4a13f43@13.124.50.97:26656,08c0e4c197a0607a9832f9b365d07cef9b04a859@3.34.181.126:26656,34cec0c4ada4cd7f8ad26c457d604edc0eff3cb0@13.124.253.195:26656,72016f93daf677147c5d1d2625273dde61ae2d0a@3.34.5.208:26656"/g' $HOME/.rizon/config/config.toml
+sed -i 's/seeds = ""/seeds = "d95b51d2cf05446b59cc85d4c95758985e8f78e8@157.230.33.131:26656, 765e16083b5bd1740a759370ad9001de9af8409d@172.104.184.201:26656, b197e7a5c3a70d6e6d5d65a09d881fa4ff597201@65.21.106.221:26656, fc40d080708997112f799afaac09c667a560131a@65.21.184.214:26656"/g' $HOME/.rizon/config/config.toml
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/$projectName.service
 [Unit]
