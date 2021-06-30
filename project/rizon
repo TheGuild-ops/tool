@@ -36,7 +36,7 @@ Description=Rizon Node
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=/root/TGS/bin/$projectName/ start
+ExecStart=$HOME/go/bin/rizond start
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
