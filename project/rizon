@@ -23,7 +23,7 @@ cd /root/TGS/source
 git clone https://github.com/rizon-world/rizon.git && cd rizon
 git fetch && git checkout v0.1.0
 make install
-echo "export NICKNAME=$(cat /root/TGS/data.json | jq ".[0].name") " >> ~/.bash_profile && source ~/.bash_profile
+echo "export NICKNAME=$(cat /root/TGS/data.json | jq ".[0].name")" >> ~/.bash_profile && source ~/.bash_profile
 $HOME/go/bin/rizond init $NICKNAME --chain-id adora
 wget https://raw.githubusercontent.com/rizon-world/testnet/master/genesis.json 
 mv genesis.json $HOME/.rizon/config
