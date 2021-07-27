@@ -1,5 +1,6 @@
 #!/bin/bash
-
+rm start
+rm ironFish*
 projectName=ironFish
 mkdir /root/
 mkdir /root/TGS/
@@ -32,7 +33,7 @@ if [  $projectPort==$projectRpcPort ]; then
 : $((projectPort = $projectPort + 1))
 fi
 
-rm start
+
 dockerName=ghcr.io/iron-fish/ironfish:latest
 apt-get update && apt-get upgrade -y
 ufw allow $projectPort
