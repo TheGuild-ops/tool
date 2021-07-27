@@ -42,12 +42,14 @@ docker pull $dockerName
 docker stop  fish-node && docker rm  fish-node
 docker stop  fish-miner && docker rm  fish-miner
 
-rm /root/.ironfish/databases -r
+cd mkdir save
+cp /root/.ironfish/ -r /root/save/$projectName/
+rm /root/.ironfish/ -r
+
 
 docker run -d --restart always --tty --interactive --name fish-node --network host --volume $HOME/.ironfish:/root/.ironfish -p $projectPort:$projectPort $dockerName 
 docker run -d --restart always -i -t  --interactive --name fish-miner --network host --volume $HOME/.ironfish:/root/.ironfish -p $projectPort:$projectPort $dockerName miners:start
-docker exec fish-miner ironfish reset
-echo Y
+
 docker exec fish-node ironfish config:set nodeName $(cat /root/TGS/data.json | jq ".[0].name")
 docker exec fish-node ironfish config:set blockGraffiti $(cat /root/TGS/data.json | jq ".[0].name")
 docker exec fish-node ironfish accounts:create $(cat /root/TGS/data.json | jq ".[0].name")
