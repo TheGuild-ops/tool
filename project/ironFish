@@ -42,7 +42,8 @@ docker pull $dockerName
 docker stop  fish-node && docker rm  fish-node
 docker stop  fish-miner && docker rm  fish-miner
 
-cd mkdir save
+cd 
+mkdir save
 cp /root/.ironfish/ -r /root/save/$projectName/
 rm /root/.ironfish/ -r
 
