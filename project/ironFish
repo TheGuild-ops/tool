@@ -37,7 +37,7 @@ dockerName=ghcr.io/iron-fish/ironfish:latest
 apt-get update && apt-get upgrade -y
 ufw allow $projectPort
 docker pull $dockerName 
-docker exec fish-miner ironfish reset
+echo Y | docker exec fish-miner ironfish reset
 
 docker stop  fish-node && docker rm  fish-node
 docker stop  fish-miner && docker rm  fish-miner
