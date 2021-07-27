@@ -48,4 +48,4 @@ docker exec fish-node ironfish config:set nodeName $(cat /root/TGS/data.json | j
 docker exec fish-node ironfish config:set blockGraffiti $(cat /root/TGS/data.json | jq ".[0].name")
 docker exec fish-node ironfish accounts:create $(cat /root/TGS/data.json | jq ".[0].name")
 docker exec fish-node ironfish accounts:use $(cat /root/TGS/data.json | jq ".[0].name")
-docker exec fish-node ironfish faucet:giveme $(cat /root/TGS/data.json | jq ".[0].name")
+docker exec fish-node ironfish faucet:giveme 
