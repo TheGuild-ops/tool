@@ -48,13 +48,13 @@ cp /root/.ironfish/ -r /root/save/$projectName/
 rm /root/.ironfish/ -r
 
 
-docker run -d --restart always --tty --interactive --name fish-node --network host --volume $HOME/.ironfish:/root/.ironfish -p $projectPort:$projectPort $dockerName 
-docker run -d --restart always -i -t  --interactive --name fish-miner --network host --volume $HOME/.ironfish:/root/.ironfish -p $projectPort:$projectPort $dockerName miners:start
+docker run -d --restart always --tty --interactive --name fish-node --network host --volume $HOME/.ironfish:/root/.ironfish -p $projectPort:$projectPort $dockerName --port $projectPort
+docker run -d --restart always -i -t  --interactive --name fish-miner --network host --volume $HOME/.ironfish:/root/.ironfish -p $projectPort:$projectPort $dockerName miners:start --port $projectPort
 
-docker exec fish-node ironfish config:set nodeName $(cat /root/TGS/data.json | jq ".[0].name")
-docker exec fish-node ironfish config:set blockGraffiti $(cat /root/TGS/data.json | jq ".[0].name")
-docker exec fish-node ironfish accounts:create $(cat /root/TGS/data.json | jq ".[0].name")
-docker exec fish-node ironfish accounts:use $(cat /root/TGS/data.json | jq ".[0].name")
-docker exec fish-node ironfish faucet:giveme 
+docker exec fish-miner ironfish config:set nodeName $(cat /root/TGS/data.json | jq ".[0].name")
+docker exec fish-miner ironfish config:set blockGraffiti $(cat /root/TGS/data.json | jq ".[0].name")
+docker exec fish-miner ironfish accounts:create $(cat /root/TGS/data.json | jq ".[0].name")
+docker exec fish-miner ironfish accounts:use $(cat /root/TGS/data.json | jq ".[0].name")
+docker exec fish-miner ironfish faucet:giveme 
 
 
