@@ -38,7 +38,7 @@ while read response
     break
    ;;
     [6])
-    curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/rizon | bash
+    curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/ironFish | bash
     break
    ;;
    
