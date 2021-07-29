@@ -20,6 +20,8 @@ fi
 export projectWsPort=$(portAssign)
 export projectPort=$(portAssign)
 export projectRpcPort=$(portAssign)
+export pPort1=$(portAssign)
+export pPort2=$(portAssign)
 ulimit -Sn 65535
 ulimit -Hn 65535
 export gitUrl=https://github.com/Omniflix/omniflixhub.git
