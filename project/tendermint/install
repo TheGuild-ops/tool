@@ -10,12 +10,14 @@ cd $projectName
 git checkout $projectVersion
 make install
 rm .omniflixhub/config/
+rm /root/.omniflixhub/config/genesis.json
+$projectFile keys add $monikerName
+$projectFile unsafe-reset-all 
 $projectFile init $monikerName --chain-id $projectChainId
 curl $projectGenesisUrl > ~/.$projectName/config/genesis.json
 
-$projectFile keys add $monikerName
-$projectFile unsafe-reset-all 
-sed -i.bak -e "s/^seeds *=.*/seeds = \"$projectSeeds\"/; s/^persistent_peers *=.*/persistent_peers = \"$projectPeers\"/" ~/.$projectFile/config/config.toml
+
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$projectSeeds\"/; s/^persistent_peers *=.*/persistent_peers = \"$projectPeers\"/" ~/.$projectName/config/config.toml
 
 ufw allow $projectRpcPort
 ufw allow $projectWsPort
