@@ -3,11 +3,11 @@ echo "               System Update             "
 echo "-----------------------------------------"
 sudo apt update && sudo apt upgrade -y
   
-pkg=(ocaml ocamlbuild	automake autoconf	libtool	wget	python	libssl-dev \
-git	perl	tmux	ufw	gcc	unzip	zip	jq	make	golang-statik	clang	pkg-config \
+packages=(ocaml ocamlbuild	automake autoconf	libtool	wget	python	libssl-dev \
+git	perl	tmux	ufw	gcc	unzip	zip	jq make	golang-statik	clang	pkg-config \
 build-essential	curl ntp llvm	build-essential cmake	glances)
 
-for package in ${pkg[@]}; do
+for package in ${packages[@]}; do
   echo "-----------------------------------------"
   echo "              Install $package            "
   echo "-----------------------------------------"
