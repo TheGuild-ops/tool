@@ -22,7 +22,7 @@ sed -i.bak -e "s/^pprof_laddr *=.*/pprof_laddr = \"localhost\x3A$projectRpcPort\
 sed -i.bak -e "s/^proxy_app *=.*/proxy_app = \"tcp:\x2F\x2F127.0.0.1:$projectWsPort\"/" ~/.$projectName/config/config.toml
 sed -i.bak -e "s/^laddr *=.*/laddr = \"tcp:\x2F\x2F0.0.0.0:$projectPort\"/" ~/.$projectName/config/config.toml
 sed -i.bak -e "s/^address *=.*/address = \"0.0.0.0:$pPort1\"/" ~/.$projectName/config/app.toml
-sed -i.bak -e "0,/^laddr *=.*/laddr = \"tcp:\x2F\x2F0.0.0.0:$projectPort\"/" ~/.$projectName/config/config.toml
+sed -i.bak -e "s/^laddr *=.*/laddr = \"tcp:\x2F\x2F0.0.0.0:$pPort2\"/g1" ~/.$projectName/config/config.toml
 
 echo $projectRpcPort
 echo $projectWsPort
