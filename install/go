@@ -6,16 +6,15 @@ echo "-----------------------------------------"
 VERSION=$1
 cheak=go version | grep "$VERSION"
 echo 
-if [ ! -z "$cheak" ];
-sudo rm -rf /usr/local/go
-curl https://dl.google.com/go/$VERSION.linux-amd64.tar.gz | sudo tar -C /usr/local -zxvf -
-
-cat <<'EOF' >>$HOME/.profile
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export GO111MODULE=on
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
-EOF
-
+if [ ! -z "$cheak" ]; then
+  sudo rm -rf /usr/local/go
+  curl https://dl.google.com/go/$VERSION.linux-amd64.tar.gz | sudo tar -C /usr/local -zxvf -
+  cat <<'EOF' >>$HOME/.profile
+    export GOROOT=/usr/local/go
+    export GOPATH=$HOME/go
+    export GO111MODULE=on
+    export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+  EOF
 source $HOME/.profile
+fi
 go version
