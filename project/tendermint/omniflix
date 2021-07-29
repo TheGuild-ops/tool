@@ -23,7 +23,7 @@ export projectRpcPort=$(portAssign)
 ulimit -Sn 65535
 ulimit -Hn 65535
 export gitUrl=https://github.com/Omniflix/omniflixhub.git
-export projectName=omniflixhub
+export projectName=omniflixhubd
 export projectVersion=v0.1.0
 export projectChainId=flixnet-1
 export projectGenesisUrl=https://raw.githubusercontent.com/OmniFlix/testnets/main/flixnet-1/genesis.json
