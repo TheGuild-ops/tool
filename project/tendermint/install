@@ -27,11 +27,13 @@ sed -i.bak -e "s/^laddr *=.*/laddr = \"tcp:\x2F\x2F0.0.0.0:$pPort2\"/g1" ~/.$pro
 echo $projectRpcPort
 echo $projectWsPort
 echo $projectPort
-
+echo $pPort2
+echo $pPort1
 ufw allow $projectRpcPort
 ufw allow $projectWsPort
 ufw allow $projectPort
-
+ufw allow $pPort1
+ufw allow $pPort2
 sudo tee /etc/systemd/system/$projectFile.service > /dev/null <<EOF
 [Unit]
 Description=$projectFile Daemon
