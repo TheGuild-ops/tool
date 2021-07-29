@@ -10,22 +10,22 @@ cd $projectName
 git checkout $projectVersion
 make install
 
-$projectName init $monikerName --chain-id $projectChainId
+$projectFile init $monikerName --chain-id $projectChainId
 curl $projectGenesisUrl > ~/.$projectName/config/genesis.json
 
 
-$projectName keys add $monikerName
+$projectFile keys add $monikerName
 
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$projectSeeds\"/; s/^persistent_peers *=.*/persistent_peers = \"$projectPeers\"/" ~/.$projectName/config/config.toml
 
-sudo tee /etc/systemd/system/$projectName.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/$projectFile.service > /dev/null <<EOF
 [Unit]
-Description=$projectName Daemon
+Description=$projectFile Daemon
 After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=/bin/$projectName start
+ExecStart=/bin/$projectFile start
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -35,6 +35,6 @@ WantedBy=multi-user.target
 EOF
 
 sudo systemctl daemon-reload
-sudo systemctl enable $projectName
-sudo systemctl start $projectName
-journalctl -f -u $projectName
+sudo systemctl enable $projectFile
+sudo systemctl start $projectFile
+journalctl -f -u $projectFile
