@@ -1,0 +1,40 @@
+#!/bin/bash
+
+cd 
+mkdir TGS
+cd TGS
+mkdir node
+cd node
+git clone $gitUrl
+cd $projectName
+git checkout $projectVersion
+make install
+
+$projectName init $monikerName --chain-id $projectChainId
+curl $projectGenesisUrl > ~/.$projectName/config/genesis.json
+
+
+$projectName keys add $monikerName
+
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$projectSeeds\"/; s/^persistent_peers *=.*/persistent_peers = \"$projectPeers\"/" ~/.$projectName/config/config.toml
+
+sudo tee /etc/systemd/system/$projectName.service > /dev/null <<EOF
+[Unit]
+Description=$projectName Daemon
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$(which $projectName) start
+Restart=always
+RestartSec=3
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable $projectName
+sudo systemctl start $projectName
+journalctl -f -u $projectName
