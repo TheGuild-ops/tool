@@ -32,7 +32,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=/bin/$projectFile start
+ExecStart=$(which omniflixhubd) start
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
