@@ -11,15 +11,21 @@ git checkout $projectVersion
 make install
 rm .omniflixhub/config/
 rm /root/.omniflixhub/config/genesis.json
-echo Y | $projectFile keys add $monikerName >> /root/TGS/dataKey-$projectName.js
+echo Y | $projectFile keys add $monikerName >> /root/TGS/dataKey-$projectName.js 2>&1
 $projectFile unsafe-reset-all 
 $projectFile init $monikerName --chain-id $projectChainId
 curl $projectGenesisUrl > ~/.$projectName/config/genesis.json
 
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$projectSeeds\"/" ~/.$projectName/config/config.toml
+sed -i.bak -e "s/^moniker *=.*/moniker = $monikerName/" ~/.$projectName/config/config.toml
+sed -i.bak -e "s/^pprof_laddr *=.*/pprof_laddr = \"localhost\x3A$projectRpcPort\"/" ~/.$projectName/config/config.toml
+sed -i.bak -e "s/^proxy_app *=.*/proxy_app = \"tcp:\x2F\x2F127.0.0.1:$projectWsPort\"/" ~/.$projectName/config/config.toml
+sed -i.bak -e "s/^laddr *=.*/laddr = \"tcp:\x2F\x2F0.0.0.0:$projectPort\"/" ~/.$projectName/config/config.toml
+sed -i.bak -e "s/^address *=.*/address = \"0.0.0.0:$pPort1\"/" ~/.$projectName/config/app.toml
 
-sed -i.bak -e "s/^seeds *=.*/seeds = \"$projectSeeds\"/; \
-s/^moniker *=.*/moniker = $monikerName/; \
-s/^persistent_peers *=.*/persistent_peers = \"$projectPeers\"/" ~/.$projectName/config/config.toml
+echo $projectRpcPort
+echo $projectWsPort
+echo $projectPort
 
 ufw allow $projectRpcPort
 ufw allow $projectWsPort
