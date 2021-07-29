@@ -45,8 +45,9 @@ while read response
    [7])
    projectName=omniflix
    base=tendermint
-    https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/$base/$projectName | bash
-    https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/$base/install | bash
+    curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/$base/$projectName | bash
+    curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/$base/install | bash
+
     break
    ;;
    [dD][oO][nN][eE]|[dD])
