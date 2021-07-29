@@ -18,7 +18,7 @@ curl $projectGenesisUrl > ~/.$projectName/config/genesis.json
 
 
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$projectSeeds\"/; \
-s/^moniker *=.*/moniker = \$monikerName\/; \
+s/^moniker *=.*/moniker = $monikerName/; \
 s/^persistent_peers *=.*/persistent_peers = \"$projectPeers\"/" ~/.$projectName/config/config.toml
 
 ufw allow $projectRpcPort
