@@ -14,7 +14,7 @@ $projectFile init $monikerName --chain-id $projectChainId
 curl $projectGenesisUrl > ~/.$projectName/config/genesis.json
 
 $projectFile keys add $monikerName
-projectFile unsafe-reset-all 
+$projectFile unsafe-reset-all 
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$projectSeeds\"/; s/^persistent_peers *=.*/persistent_peers = \"$projectPeers\"/" ~/.$projectFile/config/config.toml
 
 ufw allow $projectRpcPort
