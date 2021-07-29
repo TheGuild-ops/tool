@@ -8,6 +8,7 @@ apt install ufw
 apt-get update && apt-get upgrade -y
 sudo su -y
 clear
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/init | bash
 if [ -s $HOME/TGS/data.json ]
 then
 echo -e "Welcome back $(cat $HOME/TGS/data.json | jq '.[0].name')\n How can i serve You?"
@@ -40,7 +41,7 @@ done
 echo $name
 echo '[]' | jq '. +[{"name":"'$name'","ufwStatus":"'$ufwStatus'"}]' >  $HOME/TGS/data.json
 fi
-curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/init | bash
+
 clear
 echo -e " Psl choose your action; \n 1 - install node; \n 2 - upgrade node \n"
 read action
