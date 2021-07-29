@@ -1,6 +1,16 @@
-wget https://golang.org/dl/go1.16.3.linux-amd64.tar.gz
-export PATH=$PATH:/usr/local/go/bin
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz
-cp /usr/local/go/bin/go /usr/local/bin/go
-rm go1.16.3.linux-amd64*
+#!/bin/bash
+VERSION=$1
+cheak=go version | grep "$VERSION"
+if [ ! -z "$cheak" ];
+sudo rm -rf /usr/local/go
+curl https://dl.google.com/go/$VERSION.linux-amd64.tar.gz | sudo tar -C /usr/local -zxvf -
+
+cat <<'EOF' >>$HOME/.profile
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export GO111MODULE=on
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+EOF
+
+source $HOME/.profile
 go version
