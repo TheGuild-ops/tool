@@ -29,4 +29,4 @@ export projectChainId=flixnet-1
 export projectGenesisUrl=https://raw.githubusercontent.com/OmniFlix/testnets/main/flixnet-1/genesis.json
 export projectSeeds="af3b140b9283f568aa49097e9e7dba8a9f3498e3@45.72.100.122:26656"
 export projectPeers="449848dbf4c9efec273f9014b3e2ff7f2ca468e5@45.72.100.123:26656,086706a33dd2c511bf0162ee3583429a9e2ab1a5@45.72.100.124:26656"
-export monikerName $(cat /root/TGS/data.json | jq ".[0].name")
+export monikerName=$(cat /root/TGS/data.json | jq ".[0].name")
