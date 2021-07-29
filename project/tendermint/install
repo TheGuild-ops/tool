@@ -25,7 +25,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which $projectName) start
+ExecStart=/bin/$projectName start
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
