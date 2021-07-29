@@ -1,6 +1,11 @@
 #!/bin/bash
+
+echo "-----------------------------------------"
+echo "         Install GO v  $VERSION          "
+echo "-----------------------------------------"
 VERSION=$1
 cheak=go version | grep "$VERSION"
+echo 
 if [ ! -z "$cheak" ];
 sudo rm -rf /usr/local/go
 curl https://dl.google.com/go/$VERSION.linux-amd64.tar.gz | sudo tar -C /usr/local -zxvf -
