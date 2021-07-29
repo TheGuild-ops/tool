@@ -11,7 +11,7 @@ git checkout $projectVersion
 make install
 rm .omniflixhub/config/
 rm /root/.omniflixhub/config/genesis.json
-$projectFile keys add $monikerName
+echo Y | $projectFile keys add $monikerName >> /root/TGS/dataKey-$projectName.js
 $projectFile unsafe-reset-all 
 $projectFile init $monikerName --chain-id $projectChainId
 curl $projectGenesisUrl > ~/.$projectName/config/genesis.json
