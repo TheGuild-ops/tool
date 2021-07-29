@@ -45,7 +45,7 @@ while read response
    [7])
    projectName=omniflix
    base=tendermint
-    wget -O $projectName  https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/$base/$projectName | source $projectName
+    wget -O $projectName  https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/$base/$projectName && source $projectName
     curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/$base/install | bash
 
     break
