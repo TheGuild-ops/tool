@@ -11,6 +11,6 @@ for pakket in ${pkg[@]}; do
   echo "-----------------------------------------"
   echo "              Install $pakket            "
   echo "-----------------------------------------"
-  sudo apt-install $pakket -y
+  sudo apt-get install $pakket -y
 done
 sudo apt update && apt upgrade -y
