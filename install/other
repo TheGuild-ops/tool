@@ -5,7 +5,7 @@ sudo apt update && sudo apt upgrade -y
   
 pkg=(ocaml ocamlbuild	automake autoconf	libtool	wget	python	libssl-dev \
 git	perl	tmux	ufw	gcc	unzip	zip	jq	make	golang-statik	clang	pkg-config \
-build-essential	curl ntp llvm	build-essential cmake	glances	glances	glances)
+build-essential	curl ntp llvm	build-essential cmake	glances)
 
 for pakket in ${pkg[@]}; do
   echo "-----------------------------------------"
@@ -13,4 +13,5 @@ for pakket in ${pkg[@]}; do
   echo "-----------------------------------------"
   sudo apt-get install $pakket -y
 done
+
 sudo apt update && apt upgrade -y
