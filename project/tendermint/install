@@ -9,7 +9,7 @@ git clone $gitUrl
 cd $projectName
 git checkout $projectVersion
 make install
-
+rm .omniflixhub/config/
 $projectFile init $monikerName --chain-id $projectChainId
 curl $projectGenesisUrl > ~/.$projectName/config/genesis.json
 
