@@ -7,11 +7,11 @@ pkg=(ocaml ocamlbuild	automake autoconf	libtool	wget	python	libssl-dev \
 git	perl	tmux	ufw	gcc	unzip	zip	jq	make	golang-statik	clang	pkg-config \
 build-essential	curl ntp llvm	build-essential cmake	glances)
 
-for pakket in ${pkg[@]}; do
+for package in ${pkg[@]}; do
   echo "-----------------------------------------"
-  echo "              Install $pakket            "
+  echo "              Install $package            "
   echo "-----------------------------------------"
-  sudo apt-get install $pakket -y
+  sudo apt-get install $package -y
 done
 
 sudo apt update && apt upgrade -y
