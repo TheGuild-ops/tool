@@ -9,8 +9,8 @@ git clone $gitUrl
 cd $projectName
 git checkout $projectVersion
 make install
-rm .omniflixhub/config/
-rm /root/.omniflixhub/config/genesis.json
+rm .$projectName/config/
+rm /root/.$projectName/config/genesis.json
 echo Y | $projectFile keys add $monikerName >> /root/TGS/dataKey-$projectName.js 2>&1
 $projectFile unsafe-reset-all 
 $projectFile init $monikerName --chain-id $projectChainId
@@ -41,7 +41,7 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which omniflixhubd) start
+ExecStart=$(which $projectName) start
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
