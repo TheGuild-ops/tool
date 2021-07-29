@@ -19,7 +19,11 @@ echo $([ ! -z "$cheak" ])
 
 if [ -z "$cheak" ]; then
  echo "1"
+  rm -rvf /usr/local/go/
   sudo rm -rf /usr/local/go
+  sudo rm /etc/paths.d/go
+  rm /usr/local/bin/go
+
   curl https://dl.google.com/go/$VERSION.linux-amd64.tar.gz | sudo tar -C /usr/local -zxvf -
   cat <<'EOF' >>$HOME/.profile
     export GOROOT=/usr/local/go
