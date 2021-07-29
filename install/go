@@ -4,9 +4,21 @@ echo "-----------------------------------------"
 echo "         Install GO v  $VERSION          "
 echo "-----------------------------------------"
 VERSION=$1
+
+if [ "$VERSION" == "" ]; then
+    VERSION="go1.15.6"
+fi
+
 cheak=$(go version | grep "$VERSION")
 
-if [ ! -z "$cheak" ]; then
+echo $VERSION
+echo $cheak
+
+echo cheak
+echo $([ ! -z "$cheak" ])
+
+if [ -z "$cheak" ]; then
+ echo "1"
   sudo rm -rf /usr/local/go
   curl https://dl.google.com/go/$VERSION.linux-amd64.tar.gz | sudo tar -C /usr/local -zxvf -
   cat <<'EOF' >>$HOME/.profile
@@ -14,7 +26,10 @@ if [ ! -z "$cheak" ]; then
     export GOPATH=$HOME/go
     export GO111MODULE=on
     export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
-  EOF
+EOF
+
 source $HOME/.profile
 fi
 go version
+
+
