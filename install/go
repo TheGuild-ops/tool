@@ -6,7 +6,7 @@ echo "-----------------------------------------"
 VERSION=$1
 
 if [ "$VERSION" == "" ]; then
-    VERSION="go1.15.6"
+    VERSION="go1.16.5"
 fi
 
 cheak=$(go version | grep "$VERSION")
