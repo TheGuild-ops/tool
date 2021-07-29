@@ -3,10 +3,9 @@ echo "               System Update             "
 echo "-----------------------------------------"
 sudo apt update && sudo apt upgrade -y
   
-pkg=(build-essential ocaml ocamlbuild automake autoconf libtool wget python libssl-dev git \
-cmake perl tmux ufw gcc unzip zip jq make golang-statik make clang pkg-config libssl-dev \
-build-essential git curl ntp jq llvm build-essential ocaml ocamlbuild automake autoconf \
-libtool wget python libssl-dev git cmake perl tmux ufw gcc unzip zip jq make golang-statik glances)
+pkg=(ocaml ocamlbuild	automake autoconf	libtool	wget	python	libssl-dev \
+git	perl	tmux	ufw	gcc	unzip	zip	jq	make	golang-statik	clang	pkg-config \
+build-essential	curl ntp llvm	build-essential cmake	glances	glances	glances)
 
 for pakket in ${pkg[@]}; do
   echo "-----------------------------------------"
