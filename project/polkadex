@@ -1,0 +1,41 @@
+cd
+apt-get install unzip -y
+mkdir polkadex
+cd polkadex
+rm * -r
+wget https://github.com/Polkadex-Substrate/Polkadex/releases/download/v0.4.2-rc2/PolkadexNodeUbuntu.zip
+unzip PolkadexNodeUbuntu.zip
+
+cat <<EOF > /etc/systemd/system/polkadex.service
+[Unit]
+Description=Polkadex Testnet Validator Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=root
+ExecStart=/root/polkadex/polkadex-node --chain=/root/polkadex/customSpecRaw.json \
+--unsafe-rpc-external \
+--rpc-cors all \
+--unsafe-ws-external \
+--rpc-methods=unsafe \
+--bootnodes /ip4/13.235.190.203/tcp/30333/p2p/12D3KooWMJ4AMmzpRbv914ZGZR6ehBhcZvGtqYid5jxSx8vXiSr7 \
+--validator \
+--port=11111 \
+--ws-port=1122 \
+--rpc-port=1133 \
+--telemetry-url 'wss://telemetry.polkadot.io/submit/ 0'
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+ufw allow 1122
+ufw allow 1133
+ufw allow 11111
+systemctl daemin-reload
+systemctl enable polkadex
+systemctl restart polkadex
+systemctl start polkadex
+journalctl -u polkadex -f
