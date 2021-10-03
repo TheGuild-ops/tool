@@ -14,7 +14,7 @@ ExecStart=/root/node/porta-node/target/release/porta \
 -d data/$name \
 --name $name \
 --validator \
---port 66666 --ws-port 6666 --rpc-port 6667\
+--port 16666 --ws-port 6666 --rpc-port 6667\
 --ws-external --rpc-cors all --rpc-methods=unsafe
 Restart=always
 RestartSec=3
