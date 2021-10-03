@@ -23,6 +23,10 @@ LimitNOFILE=10000
 WantedBy=multi-user.target
 EOF
 
+ufw allow 16666
+ufw allow 6666
+ufw allow 6667
+
 sudo systemctl daemon-reload && \
 sudo systemctl enable portad && \
 sudo systemctl restart portad
