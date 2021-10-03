@@ -1,0 +1,24 @@
+apt-get update && apt-get upgrade -y
+mkdir node; cd node
+git clone https://github.com/porta-network/porta-node.git
+cd porta-node && cargo build --release
+name=$(cat /root/node/name)
+sudo tee <<EOF >/dev/null /etc/systemd/system/portad.service
+[Unit]
+Description=Porta Node
+After=network-online.target
+[Service]
+User=$USER
+ExecStart=/root/node/porta-node/target/release/porta \
+--chain /root/node/porta-node/chain-spec-padlock.json \
+-d data/$name \
+--name $name \
+--validator \
+--port 66666 --ws-port 6666--rpc-port 6667\
+--ws-external --rpc-cors all --rpc-methods=unsafe
+Restart=always
+RestartSec=3
+LimitNOFILE=10000
+[Install]
+WantedBy=multi-user.target
+EOF
