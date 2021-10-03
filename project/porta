@@ -8,7 +8,7 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/portad.service
 Description=Porta Node
 After=network-online.target
 [Service]
-User=$USER
+User=root
 ExecStart=/root/node/porta-node/target/release/porta \
 --chain /root/node/porta-node/chain-spec-padlock.json \
 -d data/$name \
