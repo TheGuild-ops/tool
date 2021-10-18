@@ -1,0 +1,35 @@
+cd; mkdir tool
+cat <<EOF > /$HOME/tool/massaAutoBuyRoll
+#!/bin/bash
+for ((;;))
+do
+echo go
+cd $HOME/massa/massa-client/
+wallet_info=`./massa-client --cli true wallet_info`
+address=`jq -r ".balances | keys[0]" <<< $wallet_info`
+./massa-client buy_rolls "$address" 1 0
+sleep 1h
+done
+
+EOF
+
+touch /etc/systemd/system/massaAutoBuyRoll.service
+chmod 664 /etc/systemd/system/massaAutoBuyRoll.service
+
+cat <<EOF > /etc/systemd/system/massaAutoBuyRoll.service
+[Unit]
+Description=massaAutoBuyRoll
+After=network-online.target
+
+[Service]
+User=root
+TimeoutStartSec=0
+ExecStart=/$HOME/tool/massaAutoBuyRoll
+Restart=always
+RestartSec=3
+LimitNOFILE=65535
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
+EOF
