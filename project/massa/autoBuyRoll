@@ -5,8 +5,8 @@ for ((;;))
 do
 echo go
 cd $HOME/massa/massa-client/
-wallet_info=./massa-client --cli true wallet_info
-address=jq -r ".balances | keys[0]" <<< $wallet_info
+wallet_info=$(./massa-client --cli true wallet_info)
+address=$(jq -r ".balances | keys[0]" <<< $wallet_info)
 ./massa-client buy_rolls "$address" 1 0
 sleep 1h
 done
