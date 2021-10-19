@@ -1,0 +1,37 @@
+ sudo apt-get update && sudo apt-get upgrade -y
+  sudo apt-get install git curl jq -y
+  cd && git clone https://github.com/IDEP-network/testnet-binaries.git
+  sudo chmod +x $HOME/testnet-binaries/Denali-0.0.1/iond && \
+ln -s $HOME/testnet-binaries/Denali-0.0.1/iond /usr/bin/
+echo enter Moniker
+read moniker
+echo "export moniker=$moniker" >> ~/.bash_profile
+source ~/.bash_profile
+iond init $moniker
+rm $HOME/.ion/config/genesis*; \
+wget -P $HOME/.ion/config/ \https://raw.githubusercontent.com/IDEP-network/testnet-binaries/main/Denali-0.0.1/genesis.json
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \
+\"95a7b71ab6ad8fad5f1ed3b49472683adea92cf1@142.93.65.220:26656,\
+dc07da4be6ff285a1be2e9501fa92efef248d025@64.225.75.108:26656,\
+3774f7f8f841e4b21500fe51dff453f7a6851afb@143.198.137.45:26656\"/" \
+$HOME/.ion/config/config.toml
+cat $HOME/.ion/config/config.toml | grep "persistent_peers ="
+
+sudo tee <<EOF >/dev/null /etc/systemd/system/idepd.service
+[Unit]
+Description=IDEP Node
+After=network-online.target
+[Service]
+User=$USER
+ExecStart=/usr/bin/iond start
+Restart=always
+RestartSec=10
+LimitNOFILE=10000
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload && \
+sudo systemctl enable idepd && sudo systemctl restart idepd
+
+sudo journalctl -u idepd -f
