@@ -7,6 +7,7 @@ echo "add port $port"
 sudo ufw allow $port
 done
 sudo ufw allow 22
+sudo ufw allow 30333
 sudo ufw --force enable
 ufw deny out from any to 10.0.0.0/8
 ufw deny out from any to 172.16.0.0/12
