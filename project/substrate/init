@@ -39,7 +39,7 @@ while read action
   ;;
 ##Update
   [2])
-        echo 2
+    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/substrate/update -O update && bash update $chain $token
   break
   ;;
 ##Refresh
