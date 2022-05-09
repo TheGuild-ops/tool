@@ -57,7 +57,8 @@ services:
       "--pruning=1000"
     ]
 EOF
+
 ufw allow 30333
-ufw allow pp2p
-ufw allow prpc
-ufw allow pws
+ufw allow $pp2p
+ufw allow $prpc
+ufw allow $pws
