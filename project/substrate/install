@@ -1,0 +1,72 @@
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  -o - -L | bash
+
+CHAIN=${1}
+NAME=${2}
+mkdir $CHAIN
+cd $CHAIN
+touch docker-compose.yaml
+mkdir data
+
+function portAssign {
+ port=$((10000 + $RANDOM % 100000))
+  if [  $(ss -lntu | grep -q $port) ]; then
+   echo $port
+   portAssign
+  else
+ echo $port
+fi
+}
+
+
+pp2p=$(portAssign)
+prpc=$(portAssign)
+pws=$(portAssign)
+
+cat << EOF > docker-compose.yaml
+version: '2'
+
+services:
+  $CHAIN:
+    container_name: $CHAIN
+    image: parity/polkadot:latest
+    restart: always
+    ports:
+      - $pp2p:$pp2p # p2p port
+      - $prpc:$prpc # rpc port
+      - $pws:$pws # ws port
+    volumes:
+      - ./data:/db
+    command: [
+      "--base-path=/db",
+      "--chain", "$CHAIN",
+      "--port=$pp2p",
+      "--ws-port=$pws",
+      "--rpc-port=$prpc",
+      "--validator",
+      "--rpc-methods=Unsafe",
+      "--ws-external",
+      "--unsafe-rpc-external",
+      "--unsafe-ws-external",
+      "--rpc-external",
+      "--rpc-cors", "all",
+      "--telemetry-url", "wss://telemetry-backend.w3f.community/submit 1",
+      "--telemetry-url", "wss://telemetry.polkadot.io/submit/ 0",
+      "--name", "$NAME",
+      "--wasm-execution", "Compiled",
+      "--unsafe-pruning",
+      "--pruning=1000"
+    ]
+EOF
+
+ufw allow 30333
+ufw allow $pp2p
+ufw allow $prpc
+ufw allow $pws
+mkdir data/
+mkdir data/chains/
+mkdir data/chains/polkadot
+curl -o - -L https://ksm-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/polkadot
+docker-compose up -d
+ufw dsiable
+curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://127.0.0.1:$prpc
+ufw enable
