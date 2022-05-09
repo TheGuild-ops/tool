@@ -1,0 +1,7 @@
+CHAIN=${1}
+NAME=${2}
+TOCKEN=${3}
+cd $CHAIN
+docker-compsoe down
+docker-compose pull
+docker-compsoe up -d
