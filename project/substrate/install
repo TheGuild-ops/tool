@@ -69,6 +69,6 @@ mkdir data/chains/
 mkdir data/chains/$CHAIN
 curl -o - -L https://$TOCKEN-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/$CHAIN
 docker-compose up -d
-ufw dsiable -y
+ufw disable -y
 curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://127.0.0.1:$prpc >>key
 ufw enable -y
