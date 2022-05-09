@@ -2,6 +2,7 @@ curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  
 
 CHAIN=${1}
 NAME=${2}
+TOCKEN=${3}
 mkdir $CHAIN
 cd $CHAIN
 touch docker-compose.yaml
@@ -64,8 +65,8 @@ ufw allow $prpc
 ufw allow $pws
 mkdir data/
 mkdir data/chains/
-mkdir data/chains/polkadot
-curl -o - -L https://ksm-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/polkadot
+mkdir data/chains/$CHAIN
+curl -o - -L https://${TOCKEN}-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/$CHAIN
 docker-compose up -d
 ufw dsiable
 curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://127.0.0.1:$prpc
