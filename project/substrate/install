@@ -4,6 +4,7 @@ CHAIN=${1}
 NAME=${2}
 TOCKEN=${3}
 echo $CHAIN $NAME $TOCKEN
+rm $CHAIN -r
 mkdir $CHAIN
 cd $CHAIN
 touch docker-compose.yaml
