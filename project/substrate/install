@@ -65,6 +65,9 @@ ufw allow 30333
 ufw allow $pp2p
 ufw allow $prpc
 ufw allow $pws
+docker-compose down
+docker stop $CHAIN
+rm data -r 
 mkdir data/
 mkdir data/chains/
 
