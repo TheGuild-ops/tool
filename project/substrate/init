@@ -8,10 +8,12 @@ while read chain
   case $chain in
   [1])
         chain=polkadot
+        token=dot
    break
   ;;
   [2])
         chain=kusama
+        token=ksm
    break
   ;;
   *)
@@ -32,7 +34,7 @@ while read action
   [1])
     echo "Pls enter validator name"
     read name
-    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/substrate/install -O install && install $chain $name 
+    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/substrate/install -O install && install $chain $name $token
   break
   ;;
 ##Update
