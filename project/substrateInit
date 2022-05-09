@@ -30,7 +30,9 @@ while read action
   case $action in
 ##install
   [1])
-        echo 1
+  echo "Enter validator name"
+    read name
+    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/substrate -O install && bash install $chain $name
   break
   ;;
 ##Update
