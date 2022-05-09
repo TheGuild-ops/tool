@@ -2,6 +2,6 @@ CHAIN=${1}
 NAME=${2}
 TOCKEN=${3}
 cd $CHAIN
-docker-compsoe down
+docker-compose down
 docker-compose pull
-docker-compsoe up -d
+docker-compose up -d
