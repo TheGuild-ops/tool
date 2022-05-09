@@ -72,13 +72,13 @@ mkdir data/chains/
 case "$CHAIN" in
 
  "polkadot" )
-curl -o - -L https://$TOCKEN-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/polkadot/
-mkdir data/chains/polkadot/
+   mkdir data/chains/polkadot/
+   curl -o - -L https://$TOCKEN-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/polkadot/
  ;;
 
  "kusama" )
-curl -o - -L https://$TOCKEN-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/ksmcc3/
-mkdir data/chains/kusama/
+  mkdir data/chains/ksmcc3/
+  curl -o - -L https://$TOCKEN-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/ksmcc3/
  ;;
 
 esac
