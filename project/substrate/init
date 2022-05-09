@@ -1,0 +1,50 @@
+clear
+echo "Pls choose chain"
+echo [1] - Polkadot
+echo [2] - Kusama
+
+while read chain
+ do
+  case $chain in
+  [1])
+        chain=polkadot
+   break
+  ;;
+  [2])
+        chain=kusama
+   break
+  ;;
+  *)
+   echo "Please, enter 1 or 2!"
+  ;;
+esac
+done
+clear
+echo "What do you want to do?"
+echo [1] - Install
+echo [2] - Update
+echo [3] - ReInstall DB
+
+while read action
+ do
+  case $action in
+##install
+  [1])
+        echo 1
+  break
+  ;;
+##Update
+  [2])
+        echo 2
+  break
+  ;;
+##Refresh
+  [3])
+        echo 3
+  break
+  ;;
+  *)
+   echo "Please, enter 1 or 2 or 3!"
+  ;;
+esac
+done
