@@ -66,9 +66,27 @@ ufw allow $prpc
 ufw allow $pws
 mkdir data/
 mkdir data/chains/
-mkdir data/chains/$CHAIN
-curl -o - -L https://$TOCKEN-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/$CHAIN
+
+
+case "$CHAIN" in
+
+ "polkadot" )
+curl -o - -L https://$TOCKEN-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/polkadot/
+mkdir data/chains/polkadot/
+ ;;
+
+ "kusama" )
+curl -o - -L https://$TOCKEN-rocksdb.polkashots.io/snapshot | lz4 -c -d - | tar -x -C ./data/chains/ksmcc3/
+mkdir data/chains/kusama/
+ ;;
+
+esac
+
+
+docker system prune -a -y 
+docker-compose pull
 docker-compose up -d
+chmod 777 -R data/
 ufw disable
 curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "author_rotateKeys", "params":[]}' http://127.0.0.1:$prpc >>key
 echo y | ufw enable
