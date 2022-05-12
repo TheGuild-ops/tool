@@ -2,6 +2,7 @@ clear
 echo "Pls choose chain"
 echo [1] - Polkadot
 echo [2] - Kusama
+echo [3] - Parachein
 
 while read chain
  do
@@ -16,8 +17,32 @@ while read chain
         token=ksm
    break
   ;;
+    [3])
+        chain=parachein
+        clear
+        echo "What do you want to do?"
+        echo [1] - Install
+        echo [2] - Update
+        echo [3] - ReInstall DB
+   while read action
+ do
+  case $action in
+##install
+  [1])
+    echo "Pls enter validator name"
+    read name
+    wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/substrate/install -O install && bash install $chain $name $token
+  break
+  ;;
+        
+        token=ksm
+   break
+  ;;
   *)
-   echo "Please, enter 1 or 2!"
+   echo "Pls choose chain"
+    echo [1] - Polkadot
+    echo [2] - Kusama
+    echo [3] - Parachein
   ;;
 esac
 done
