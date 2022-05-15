@@ -1,7 +1,7 @@
 mkdir aptos
 cd aptos
 sudo apt update && sudo apt upgrade -y
-echo "export WORKSPACE=node/aptos" >> $HOME/.bash_profile
+echo "export WORKSPACE=/root/node/aptos" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(curl -s ifconfig.me)" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 sudo apt-get install jq unzip -y
@@ -18,13 +18,13 @@ wget -qO aptos-cli.zip https://github.com/aptos-labs/aptos-core/releases/downloa
 unzip -o aptos-cli.zip -d /usr/local/bin
 chmod +x /usr/local/bin/aptos
 rm aptos-cli.zip
-mkdir ~/$WORKSPACE && cd ~/$WORKSPACE
+mkdir $WORKSPACE && cd $WORKSPACE
 wget -qO docker-compose.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/docker-compose.yaml
 wget -qO validator.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/validator.yaml
 wget -qO fullnode.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/fullnode.yaml
-aptos genesis generate-keys --output-dir ~/$WORKSPACE
+aptos genesis generate-keys --output-dir $WORKSPACE
 aptos genesis set-validator-configuration \
-  --keys-dir ~/$WORKSPACE --local-repository-dir ~/$WORKSPACE \
+  --keys-dir $WORKSPACE --local-repository-dir $WORKSPACE \
   --username aptosbot \
   --validator-host $PUBLIC_IP:6180 \
   --full-node-host $PUBLIC_IP:6182
@@ -40,6 +40,6 @@ EOF
 wget -qO framework.zip https://github.com/aptos-labs/aptos-core/releases/download/aptos-framework-v0.1.0/framework.zip
 unzip -o framework.zip
 rm framework.zip
-aptos genesis generate-genesis --local-repository-dir ~/$WORKSPACE --output-dir ~/$WORKSPACE
+aptos genesis generate-genesis --local-repository-dir $WORKSPACE --output-dir $WORKSPACE
 docker compose up -d
 
