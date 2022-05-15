@@ -43,6 +43,8 @@ while read chain
 esac
 done
 clear
+
+##-------------------------------##
 echo "What do you want to do?"
 echo [1] - Install
 echo [2] - Update
