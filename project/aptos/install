@@ -1,7 +1,7 @@
 mkdir aptos
 cd aptos
 sudo apt update && sudo apt upgrade -y
-echo "export WORKSPACE=/root/aptos" >> $HOME/.bash_profile
+echo "export WORKSPACE=node/aptos" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(curl -s ifconfig.me)" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 sudo apt-get install jq unzip -y
