@@ -35,7 +35,7 @@ while read chain
   break
   ;;
   *)
-   echo "Pls choose chain"
+    echo "Pls choose chain"
     echo [1] - Polkadot
     echo [2] - Kusama
     echo [3] - Parachein
