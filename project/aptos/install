@@ -1,5 +1,6 @@
 cd
 mkdir node
+
 cd node
 mkdir aptos
 cd aptos
