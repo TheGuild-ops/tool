@@ -1,5 +1,9 @@
+cd
+mkdir node
+cd node
 mkdir aptos
 cd aptos
+docker compose down
 sudo apt update && sudo apt upgrade -y
 ufw allow 8080
 ufw allow 9101
