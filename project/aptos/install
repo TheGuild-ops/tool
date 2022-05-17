@@ -1,16 +1,14 @@
 cd
 mkdir node
-
 cd node
 mkdir aptos
 cd aptos
 docker compose down
 sudo apt update && sudo apt upgrade -y
-
 ufw allow 8080
 ufw allow 9101
 ufw allow 6180
-echo "export WORKSPACE=/root/node/aptos" >> $HOME/.bash_profile
+echo "export WORKSPACE=$HOME/node/aptos" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(curl -s ifconfig.me)" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 sudo apt-get install jq unzip -y
