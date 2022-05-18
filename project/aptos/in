@@ -14,7 +14,7 @@ cargo run --release -p aptos -- genesis set-validator-configuration \
   --full-node-host `wget -qO- eth0.me`:6182
 
 touch ~/$WORKSPACE/layout.yaml  
-tee layout.yaml > /dev/null <<EOF
+tee ~/$WORKSPACE/layout.yaml > /dev/null <<EOF
 ---
 root_key: "0x5243ca72b0766d9e9cbf2debf6153443b01a1e0e6d086c7ea206eaf6f8043956"
 users:
