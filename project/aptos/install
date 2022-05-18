@@ -67,3 +67,4 @@ rm framework.zip
 
 aptos genesis generate-genesis --assume-no --local-repository-dir $WORKSPACE --output-dir $WORKSPACE
 docker compose up -d
+cat $WORKSPACE/$NAME.yaml
