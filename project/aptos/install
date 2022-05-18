@@ -65,5 +65,5 @@ wget -qO framework.zip https://github.com/aptos-labs/aptos-core/releases/downloa
 unzip -o framework.zip
 rm framework.zip
 
-aptos genesis generate-genesis --local-repository-dir $WORKSPACE --output-dir $WORKSPACE
+aptos genesis generate-genesis --assume-no --local-repository-dir $WORKSPACE --output-dir $WORKSPACE
 docker compose up -d
