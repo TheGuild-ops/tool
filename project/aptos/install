@@ -7,9 +7,6 @@ mkdir aptos
 cd aptos
 docker compose down
 sudo apt update && sudo apt upgrade -y
-ufw allow 8080
-ufw allow 9101
-ufw allow 6180
 echo "export WORKSPACE=$HOME/node/aptos" >> $HOME/.bash_profile
 echo "export PUBLIC_IP=$(curl -s ifconfig.me)" >> $HOME/.bash_profile
 source $HOME/.bash_profile
@@ -67,4 +64,8 @@ rm framework.zip
 
 aptos genesis generate-genesis --assume-no --local-repository-dir $WORKSPACE --output-dir $WORKSPACE
 docker compose up -d
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall | bash 
+ufw allow 8080
+ufw allow 9101
+ufw allow 6180
 cat $WORKSPACE/$NAME.yaml
