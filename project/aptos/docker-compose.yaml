@@ -9,7 +9,7 @@ services:
     networks:
       shared:
         ipv4_address:  172.16.1.10
-    name: "aptos_validator"
+    container_name: aptos_validator
     volumes:
       - type: volume
         source: aptos-validator
@@ -38,7 +38,7 @@ services:
 
   fullnode:
     image: "${VALIDATOR_IMAGE_REPO:-aptoslab/validator}:${IMAGE_TAG:-testnet}"
-    name: "aptos_fullnode"
+    container_name: aptos_fullnode
     networks:
       shared:
         ipv4_address:  172.16.1.11
