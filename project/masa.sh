@@ -29,5 +29,5 @@ PRIVATE_CONFIG=ignore docker-compose up -d
 # Перейдите в рабочую директорию Masa
 cd ~/masa-node-v1.0
 # Остановите контейнер Masa с помощью Docker Compose
-docker-compose down
+docker-compose up -d
 sudo docker exec -it masa-node-v10_masa-node_1 geth attach /qdata/dd/geth.ipc
