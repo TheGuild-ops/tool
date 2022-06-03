@@ -23,7 +23,7 @@ mkdir node; cd node
 # Клонируем репозиторий Masa Finance
 git clone https://github.com/masa-finance/masa-node-v1.0.git
 # Перейдите в рабочую директорию Masa
-cd ~/masa-node-v1.0
+cd masa-node-v1.0
 # Запустите контейнер Masa с помощью Docker Compose
 PRIVATE_CONFIG=ignore docker-compose up -d
 # Перейдите в рабочую директорию Masa
