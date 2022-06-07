@@ -1,3 +1,5 @@
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  -o - -L | bash
+
 MONIKER=${1}
 WALLET_ADDRESS=${2}
 PLOT_SIZE=${3}
@@ -16,9 +18,9 @@ fi
 pp2p=$(portAssign)
 prpc=$(portAssign)
 pws=$(portAssign)
-ufw allow $pp2p
-ufw allow $prpc
-ufw allow $pws
+route insert ufw allow $pp2p 1
+route insert ufw allow $prpc 1
+route insert ufw allow $pws 1
 
 cat << EOF > docker-compose.yaml
 version: "3.7"
@@ -29,6 +31,8 @@ services:
       - ./data:/db
     ports:
       - "0.0.0.0:$pp2p:$pp2p"
+      - "0.0.0.0:$prpc:$prpc"
+      - "0.0.0.0:$pws:$pws"
     restart: unless-stopped
     command: [
       "--chain", "gemini-1",
@@ -48,7 +52,7 @@ services:
       interval: 30s
       retries: 5
 
-  farmer:
+farmer:
     depends_on:
       node:
         condition: service_healthy
