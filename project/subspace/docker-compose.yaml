@@ -62,8 +62,8 @@ services:
     command: [
       "--base-path", "/db/farmer",
       "farm",
-      "--node-rpc-url", "0.0.0.0:$prpc",
-      "--ws-server-listen-addr", "ws://node:$pws",
+      "--node-rpc-url", "ws://node:$prpc",
+      "--ws-server-listen-addr", "0.0.0.0:$pws",
       "--reward-address", "$WALLET_ADDRESS",
       "--plot-size", "$PLOT_SIZE"
     ]
