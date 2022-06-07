@@ -1,3 +1,4 @@
+apt-get update && apt-get upgrade -y
 echo "Pls Enter your NodeName"
 read MONIKER
 echo "Pls Enter your wallet"
