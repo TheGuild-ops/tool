@@ -49,8 +49,7 @@ services:
       timeout: 5s
       interval: 30s
       retries: 5
-
-farmer:
+  farmer:
     depends_on:
       node:
         condition: service_healthy
