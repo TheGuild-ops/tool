@@ -1,4 +1,5 @@
-echo `version: "3.7"
+cat << EOF > docker-compose.yaml
+version: "3.7"
 services:
   node:
     # For running on Aarch64 add `-aarch64` after `DATE`
@@ -65,5 +66,4 @@ services:
 volumes:
   node-data:
   farmer-data:
-`
->docker-compose.yaml
+EOF
