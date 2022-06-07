@@ -52,9 +52,9 @@ services:
       interval: 30s
       retries: 5
   farmer:
-    depends_on:
-      node:
-        condition: service_healthy
+#    depends_on:
+#      node:
+#        condition: service_healthy
     image: ghcr.io/subspace/farmer:gemini-1b-2022-june-05
     volumes:
       - ./data:/db
