@@ -1,8 +1,8 @@
-echo `Pls Enter your NodeName`
+echo "Pls Enter your NodeName"
 read MONIKER
-echo `Pls Enter your wallet`
+echo "Pls Enter your wallet"
 read WALLET_ADDRESS
 df -h
-echo `Enter plot size in gigabytes or terabytes, for instance 100G or 2T`
+echo "Enter plot size in gigabytes or terabytes, for instance 100G or 2T"
 read PLOT_SIZE
 wget https://github.com/TheGuild-ops/tool/blob/main/project/subspace/docker-compose.yaml -O dcInstall && bash dcInstall $MONIKER $WALLET_ADDRESS $PLOT_SIZE && rm dcInstall
