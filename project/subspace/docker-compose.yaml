@@ -39,6 +39,8 @@ services:
       "--pruning", "1024",
       "--keep-blocks", "1024",
       "--port", "$pp2p",
+      "--ws-port", "$pws",
+      "--rpc-port", "$prpc",
       "--rpc-cors", "all",
       "--rpc-methods", "safe",
       "--unsafe-ws-external",
