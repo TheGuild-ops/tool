@@ -5,4 +5,4 @@ read WALLET_ADDRESS
 df -h
 echo "Enter plot size in gigabytes or terabytes, for instance 100G or 2T"
 read PLOT_SIZE
-wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install $MONIKER $WALLET_ADDRESS $PLOT_SIZE && rm dcInstall
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install $MONIKER $WALLET_ADDRESS $PLOT_SIZE && rm install
