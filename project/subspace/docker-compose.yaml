@@ -18,9 +18,9 @@ fi
 pp2p=$(portAssign)
 prpc=$(portAssign)
 pws=$(portAssign)
-route insert ufw allow $pp2p 1
-route insert ufw allow $prpc 1
-route insert ufw allow $pws 1
+ufw  insert 1 allow in $pp2p
+ufw  insert 1 allow $prpc
+ufw  insert 1 allow $pws
 
 cat << EOF > docker-compose.yaml
 version: "3.7"
@@ -73,3 +73,4 @@ volumes:
   farmer-data:
 
 EOF
+
