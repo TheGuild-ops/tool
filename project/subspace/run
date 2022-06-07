@@ -10,7 +10,6 @@ read PLOT_SIZE
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  -o - -L | bash
 docker compose down
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install $MONIKER $WALLET_ADDRESS $PLOT_SIZE && rm install
-docker compose up -d
-docker compose down 
+mkdir data
 chmod 777 -R data/
 docker compose up -d
