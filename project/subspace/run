@@ -16,6 +16,6 @@ wget -O subspace_snapshot_96533.tar.gz https://snapshots.nodes.guru/subspace/sub
 docker compose down
 rm ./data/chains/subspace_gemini_1b/paritydb/full
 tar xvf subspace_snapshot_96533.tar.gz -C  ./data/chains/subspace_gemini_1b/paritydb
-rm subspace_snapshot_96533.tar.gz
+
 chmod 777 -R data/
 docker compose up -d
