@@ -8,14 +8,15 @@ echo "Enter plot size in gigabytes or terabytes, for instance 100G or 2T"
 read PLOT_SIZE
 
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  -o - -L | bash
+mkdir -p /root/node/subspace/
+cd /root/node/subspace/
 docker compose down
 
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install $MONIKER $WALLET_ADDRESS $PLOT_SIZE && rm install
-docker compose up -d
 wget -O subspace_snapshot_96533.tar.gz https://snapshots.nodes.guru/subspace/subspace_snapshot_96533.tar.gz
-docker compose down
 rm ./data/chains/subspace_gemini_1b/paritydb/full
-tar xvf subspace_snapshot_96533.tar.gz -C  ./data/chains/subspace_gemini_1b/paritydb
-
+mkdir -p /root/node/subspace/data/chains/subspace_gemini_1b/paritydb
+tar xvf subspace_snapshot_96533.tar.gz -C  /root/node/subspace/data/chains/subspace_gemini_1b/paritydb
+cd /root/node/subspace/
 chmod 777 -R data/
 docker compose up -d
