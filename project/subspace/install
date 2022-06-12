@@ -46,4 +46,4 @@ systemctl enable subspace-node
 systemctl enable subspace-farm
 systemctl start subspace-farm
 systemctl start subspace-node
-watch systemctl status -u subspace-farm  u subspace-node
+journalctl  -u subspace-farm  -u subspace-node -f
