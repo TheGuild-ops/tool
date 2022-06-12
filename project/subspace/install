@@ -2,18 +2,6 @@ NAME=${1}
 PSIZE=${2}
 RADDRESS=${3}
 
-systemctl stop subspace-farm
-systemctl stop subspace-node
-
-wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-10/subspace-farmer-ubuntu-x86_64-gemini-1b-2022-jun-10 -O subspace-farmer
-wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-10/subspace-node-ubuntu-x86_64-gemini-1b-2022-jun-10 -O subspace-node
-
-chmod +x subspace-farmer
-chmod +x subspace-node
-
-mv subspace-farmer /bin/
-mv subspace-node /bin/
-
 if [[ -z $NAME ]]
 then
   echo "Enter nodeName"
@@ -35,6 +23,20 @@ then
   echo "Enter reward adress"
 read RADDRESS
 fi
+
+systemctl stop subspace-farm
+systemctl stop subspace-node
+
+wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-10/subspace-farmer-ubuntu-x86_64-gemini-1b-2022-jun-10 -O subspace-farmer
+wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-10/subspace-node-ubuntu-x86_64-gemini-1b-2022-jun-10 -O subspace-node
+
+chmod +x subspace-farmer
+chmod +x subspace-node
+
+mv subspace-farmer /bin/
+mv subspace-node /bin/
+
+
 
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-farm | bash -s -- $PSIZE $RADDRESS
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-node | bash -s -- $NAME
