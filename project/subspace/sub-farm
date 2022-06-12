@@ -1,7 +1,7 @@
 PSIZE=${1}
 RADDRESS=${2}
 
-cat << EOF > /etc/systemctl/systemd/sub-farm.service
+cat << EOF > /etc/systemd/system/sub-farm.service
 [Unit]
 Description=Subspace Farmer
 
