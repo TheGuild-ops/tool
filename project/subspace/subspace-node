@@ -1,5 +1,4 @@
 NAME=${1}
-RADDRESS=${2}
 
 cat << EOF > /etc/systemd/system/subspace-node.service
 [Unit]
