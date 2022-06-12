@@ -9,12 +9,12 @@ Description=Subspace Farmer
 User=root
 #CPUQuota=600%
 ExecStart=/bin/subspace-farmer \
-        --base-path $(pwd)/data/farmer/ \
-        farm \
+--base-path $(pwd)/data/farmer/ \
+farm \
+--reward-address $RADDRESS \
+--plot-size $PSIZE
 #       --node-rpc-url ws://127.0.0.1:30593 \
 #       --ws-server-listen-addr 0.0.0.0:17601 \
-        --reward-address $RADDRESS \
-        --plot-size $PSIZE
 
 Restart=always
 RestartSec=10
