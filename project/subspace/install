@@ -1,3 +1,7 @@
+NAME=${1}
+PSIZE=${2}
+RADDRESS=${3}
+
 systemctl stop subspace-farm
 systemctl stop subspace-node
 
@@ -10,9 +14,34 @@ chmod +x subspace-node
 mv subspace-farmer /bin/
 mv subspace-node /bin/
 
-systemctl daemon-reload
-systemctl enable sub-node
-systemctl enable sub-farm
+if [[ -z $NAME ]]
+then
+  echo "Enter nodeName"
+  read NAME
+fi
 
-systemctl start sub-farm
-systemctl start sub-node
+if [[ -z $PSIZE ]]
+then
+  df -h
+  pwd 
+  echo "Enter plot size"
+read PSIZE
+fi
+
+if [[ -z $RADDRESS ]]
+then
+  df -h
+  pwd 
+  echo "Enter reward adress"
+read RADDRESS
+fi
+
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-farm | bash -s -- $PSIZE $RADDRESS
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-node | bash -s -- $NAME
+
+systemctl daemon-reload
+systemctl enable subspace-node
+systemctl enable subspace-farm
+systemctl start subspace-farm
+systemctl start subspace-node
+watch systemctl status -u subspace-farm  u subspace-node
