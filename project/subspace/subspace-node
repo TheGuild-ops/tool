@@ -18,8 +18,6 @@ ExecStart=/bin/subspace-node \
 --rpc-methods safe \
 --unsafe-ws-external \
 --validator \
---reserved-only \
-$(wget -qO- https://raw.githubusercontent.com/cyberomanov/subspace/main/reserved.txt) \
 --name $NAME
 #       --port 21779 \
 #       --ws-port 30593 \
