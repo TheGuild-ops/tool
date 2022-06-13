@@ -26,9 +26,8 @@ fi
 
 systemctl stop subspace-farm
 systemctl stop subspace-node
-
-wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-10/subspace-farmer-ubuntu-x86_64-gemini-1b-2022-jun-10 -O subspace-farmer
-wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-10/subspace-node-ubuntu-x86_64-gemini-1b-2022-jun-10 -O subspace-node
+wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-13/subspace-farmer-ubuntu-x86_64-gemini-1b-2022-jun-13 -O subspace-farmer
+wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-13/subspace-node-ubuntu-x86_64-gemini-1b-2022-jun-13 -O subspace-node
 
 chmod +x subspace-farmer
 chmod +x subspace-node
