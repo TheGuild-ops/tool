@@ -40,8 +40,6 @@ chmod +x subspace-node
 
 mv subspace-farmer /bin/
 mv subspace-node /bin/
-systemctl start subspace-farm
-systemctl start subspace-node
 
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-farm | bash -s -- $SUBSPACE_PLOT_SIZE $SUBSPACE_REWARD_ADRESS
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-node | bash -s -- $VALIDATOR_NAME
