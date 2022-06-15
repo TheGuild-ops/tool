@@ -5,6 +5,7 @@ SUBSPACE_REWARD_ADRESS=${3}
 PROJECT_PATH=$HOME/node/$PROJECT_NAME
 mkdir -p $PROJECT_PATH
 source $HOME/node/data
+cd $PROJECT_PATH
 
 if [[ -z $VALIDATOR_NAME ]]
 then
