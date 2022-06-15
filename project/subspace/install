@@ -24,6 +24,7 @@ if [[ -z $RADDRESS ]]
 then
   echo "Enter SubSpace reward adress"
   read SUBSPACE_REWARD_ADRESS
+  echo $SUBSPACE_PLOT_SIZE >> $HOME/node/data
 fi
 
 systemctl stop subspace-farm
