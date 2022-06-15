@@ -11,7 +11,7 @@ if [[ -z $VALIDATOR_NAME ]]
 then
   echo "Enter nodeName"
   read VALIDATOR_NAME
-  echo export $VALIDATOR_NAME >> $HOME/node/data
+  echo export VALIDATOR_NAME=$VALIDATOR_NAME >> $HOME/node/data
 fi
 
 if [[ -z $SUBSPACE_PLOT_SIZE ]]
@@ -20,14 +20,14 @@ then
   pwd 
   echo "Enter plot size"
   read SUBSPACE_PLOT_SIZE
-  echo export $SUBSPACE_PLOT_SIZE >> $HOME/node/data
+  echo export SUBSPACE_PLOT_SIZE=$SUBSPACE_PLOT_SIZE >> $HOME/node/data
 fi
 
 if [[ -z $RADDRESS ]]
 then
   echo "Enter SubSpace reward adress"
   read SUBSPACE_REWARD_ADRESS
-  echo export $SUBSPACE_PLOT_SIZE >> $HOME/node/data
+  echo export SUBSPACE_REWARD_ADRESS=$SUBSPACE_REWARD_ADRESS >> $HOME/node/data
 fi
 
 systemctl stop subspace-farm
