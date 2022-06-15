@@ -1,7 +1,9 @@
+PROJECT_NAME=subspace
 VALIDATOR_NAME=${1}
 SUBSPACE_PLOT_SIZE=${2}
 SUBSPACE_REWARD_ADRESS=${3}
-cd && mkdir node ; cd node/ && mkdir SubSpace ; touch data 
+PROJECT_PATH=$HOME/node/$PROJECT_NAME
+mkdir -p $PROJECT_PATH
 source $HOME/node/data
 
 if [[ -z $VALIDATOR_NAME ]]
