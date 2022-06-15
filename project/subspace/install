@@ -23,7 +23,7 @@ then
   echo export SUBSPACE_PLOT_SIZE=$SUBSPACE_PLOT_SIZE >> $HOME/node/data
 fi
 
-if [[ -z $RADDRESS ]]
+if [[ -z $SUBSPACE_REWARD_ADRESS ]]
 then
   echo "Enter SubSpace reward adress"
   read SUBSPACE_REWARD_ADRESS
