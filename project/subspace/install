@@ -17,7 +17,7 @@ then
   pwd 
   echo "Enter plot size"
   read SUBSPACE_PLOT_SIZE
-  echi $SUBSPACE_PLOT_SIZE >> $HOME/node/data
+  echo $SUBSPACE_PLOT_SIZE >> $HOME/node/data
 fi
 
 if [[ -z $RADDRESS ]]
