@@ -1,27 +1,29 @@
-NAME=${1}
-PSIZE=${2}
-RADDRESS=${3}
+VALIDATOR_NAME=${1}
+SUBSPACE_PLOT_SIZE=${2}
+SUBSPACE_REWARD_ADRESS=${3}
+cd && mkdir node && touch data
+source $HOME/node/data
 
-if [[ -z $NAME ]]
+if [[ -z $VALIDATOR_NAME ]]
 then
   echo "Enter nodeName"
-  read NAME
+  read VALIDATOR_NAME
+  echo $VALIDATOR_NAME >> $HOME/node/data
 fi
 
-if [[ -z $PSIZE ]]
+if [[ -z $SUBSPACE_PLOT_SIZE ]]
 then
   df -h
   pwd 
   echo "Enter plot size"
-read PSIZE
+  read SUBSPACE_PLOT_SIZE
+  echi $SUBSPACE_PLOT_SIZE >> $HOME/node/data
 fi
 
 if [[ -z $RADDRESS ]]
 then
-  df -h
-  pwd 
-  echo "Enter reward adress"
-read RADDRESS
+  echo "Enter SubSpace reward adress"
+  read SUBSPACE_REWARD_ADRESS
 fi
 
 systemctl stop subspace-farm
@@ -37,13 +39,13 @@ mv subspace-node /bin/
 systemctl start subspace-farm
 systemctl start subspace-node
 
-
-curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-farm | bash -s -- $PSIZE $RADDRESS
-curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-node | bash -s -- $NAME
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-farm | bash -s -- $SUBSPACE_PLOT_SIZE $SUBSPACE_REWARD_ADRESS
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/subspace-node | bash -s -- $VALIDATOR_NAME
 
 systemctl daemon-reload
 systemctl enable subspace-node
 systemctl enable subspace-farm
 systemctl start subspace-farm
 systemctl start subspace-node
+
 watch systemctl  status subspace-farm subspace-node -o cat
