@@ -18,6 +18,7 @@ if [[ -z $SUBSPACE_PLOT_SIZE ]]
 then
   df -h
   pwd 
+  du -sh /$HOME/node/subspace/data/farmer/
   echo "Enter plot size"
   read SUBSPACE_PLOT_SIZE
   echo export SUBSPACE_PLOT_SIZE=$SUBSPACE_PLOT_SIZE >> $HOME/node/data
