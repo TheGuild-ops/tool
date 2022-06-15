@@ -1,7 +1,7 @@
 VALIDATOR_NAME=${1}
 SUBSPACE_PLOT_SIZE=${2}
 SUBSPACE_REWARD_ADRESS=${3}
-cd && mkdir node && touch data
+cd && mkdir node ; cd node/ && mkdir SubSpace ; touch data 
 source $HOME/node/data
 
 if [[ -z $VALIDATOR_NAME ]]
