@@ -6,6 +6,8 @@ PROJECT_PATH=$HOME/node/$PROJECT_NAME
 mkdir -p $PROJECT_PATH
 source $HOME/node/data
 cd $PROJECT_PATH
+sudo apt update && \
+sudo apt install ocl-icd-opencl-dev libopencl-clang-dev libgomp1 jq -y
 
 if [[ -z $VALIDATOR_NAME ]]
 then
@@ -30,11 +32,12 @@ then
   read SUBSPACE_REWARD_ADRESS
   echo export SUBSPACE_REWARD_ADRESS=$SUBSPACE_REWARD_ADRESS >> $HOME/node/data
 fi
+VER=$(wget -qO- https://api.github.com/repos/subspace/subspace/releases | jq '.[].html_url' | grep -vE "runtime|chain-spec" | grep -Eo "gemini-[0-9]*[a-zA-Z]-[0-9]*-[a-zA-Z]*-[0-9]*" | head -n 1)
 
 systemctl stop subspace-farm
 systemctl stop subspace-node
-wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-13/subspace-farmer-ubuntu-x86_64-gemini-1b-2022-jun-13 -O subspace-farmer
-wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-13/subspace-node-ubuntu-x86_64-gemini-1b-2022-jun-13 -O subspace-node
+wget https://github.com/subspace/subspace/releases/download/$VER/subspace-farmer-ubuntu-x86_64-$VER -O subspace-farmer
+wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-13/subspace-node-ubuntu-x86_64-$VER -O subspace-node
 
 chmod +x subspace-farmer
 chmod +x subspace-node
