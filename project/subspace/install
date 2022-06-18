@@ -37,7 +37,7 @@ VER=$(wget -qO- https://api.github.com/repos/subspace/subspace/releases | jq '.[
 systemctl stop subspace-farm
 systemctl stop subspace-node
 wget https://github.com/subspace/subspace/releases/download/$VER/subspace-farmer-ubuntu-x86_64-$VER -O subspace-farmer
-wget https://github.com/subspace/subspace/releases/download/gemini-1b-2022-jun-13/subspace-node-ubuntu-x86_64-$VER -O subspace-node
+wget https://github.com/subspace/subspace/releases/download/$VER/subspace-node-ubuntu-x86_64-$VER -O subspace-node
 
 chmod +x subspace-farmer
 chmod +x subspace-node
