@@ -6,7 +6,7 @@ PROJECT_PATH=$HOME/node/$PROJECT_NAME
 mkdir -p $PROJECT_PATH
 source $HOME/node/data
 cd $PROJECT_PATH
-sudo apt update && apt upgrade && \
+sudo apt update && apt upgrade -y && \
 sudo apt install ocl-icd-opencl-dev libopencl-clang-dev libgomp1 jq glances ncdu -y
 
 if [[ -z $VALIDATOR_NAME ]]
