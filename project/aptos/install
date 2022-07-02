@@ -50,7 +50,7 @@ aptos genesis set-validator-configuration \
   --validator-host `wget -qO- eth0.me`:6180 \
   --full-node-host `wget -qO- eth0.me`:6182
 
-aptos key generate --assume-no --output-file  $WORKSPACE/keys/root
+aptos key generate --assume-yes --output-file  $WORKSPACE/keys/root
 
 tee layout.yaml > /dev/null <<EOF
 ---
@@ -72,7 +72,7 @@ wget -qO framework.zip https://github.com/aptos-labs/aptos-core/releases/downloa
 unzip -o framework.zip
 rm framework.zip
 
-aptos genesis generate-genesis --assume-no --local-repository-dir $WORKSPACE --output-dir $WORKSPACE
+aptos genesis generate-genesis --assume-yes --local-repository-dir $WORKSPACE --output-dir $WORKSPACE
 docker compose up -d
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall | bash 
 ufw allow 8080
