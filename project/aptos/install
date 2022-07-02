@@ -78,4 +78,6 @@ curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall |
 ufw allow 8080
 ufw allow 9101
 ufw allow 6180
+ufw allow 11420
+ufw allow 22840
 cat $WORKSPACE/$NAME.yaml
