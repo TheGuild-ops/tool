@@ -32,9 +32,11 @@ mv aptos /usr/local/bin
 
 
 mkdir $WORKSPACE && cd $WORKSPACE
-wget -qO docker-compose.yaml https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/aptos/docker-compose.yaml
+wget -qO https://devnet.aptoslabs.com/waypoint.txt
+wget -qO genesis.blob https://devnet.aptoslabs.com/genesis.blob
+wget -qO docker-compose.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/docker-compose.yaml
 wget -qO validator.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/validator.yaml
-wget -qO fullnode.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/fullnode.yaml
+wget -qO public_full_node wget https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/public_full_node.yaml
 
 mkdir keys
 aptos genesis generate-keys --assume-no --output-dir $WORKSPACE
