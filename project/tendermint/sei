@@ -1,0 +1,26 @@
+
+apt update && apt upgrade -y
+apt install make clang pkg-config libssl-dev build-essential git gcc chrony curl jq ncdu bsdmainutils htop net-tools lsof fail2ban wget jq ufw -y
+ver="1.18.2" && \
+wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz" && \
+sudo rm -rf /usr/local/go && \
+sudo tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz" && \
+rm "go$ver.linux-amd64.tar.gz" && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile && \
+source $HOME/.bash_profile && \
+go version
+
+git clone https://github.com/sei-protocol/sei-chain.git
+cd sei-chain
+git checkout e3958ff9cc3fa00a12b0c32cf55b635baa0d49bd
+cd sei-chain/
+make install
+echo "enter Moniker Name"
+read MONIKER
+cp /root/go/bin/seid /bin/
+# e.g. export MONIKER="validator-phils-node"
+seid init $MONIKER --chain-id sei-devnet-1 -o
+seid keys add usr --output json --home /root/.sei >> /root/sei.key
+seid add-genesis-account usr 100000000usei
+seid gentx usr 100000000usei --moniker $MONIKER --chain-id atlantic-1
+cat ~/.sei/config/gentx/gentx-*
