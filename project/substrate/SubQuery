@@ -10,6 +10,9 @@ sudo ufw allow 8000
 sudo ufw allow 9090
 sudo ufw allow 9100
 sudo ufw allow 3000:3100/tcp
+ufw allow 5432
+ufw allow 8000
+ufw allow 3100
 mkdir subquery-indexer
 curl https://raw.githubusercontent.com/subquery/indexer-services/main/docker-compose.yml -o $HOME/subquery-indexer/docker-compose.yml
 printf "[Unit]
