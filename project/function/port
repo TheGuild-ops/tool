@@ -7,4 +7,5 @@ function portAssign {
  echo $port
 fi
 }
+
 portAssign
