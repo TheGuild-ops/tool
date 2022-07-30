@@ -1,3 +1,4 @@
- curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash
- curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash
- curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash
+ p=$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+ p1=$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+ p2=$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+ echo $p $p1 $p2 
