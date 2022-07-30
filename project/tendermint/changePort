@@ -1,0 +1,22 @@
+PROJECT=${1}
+SERVICENAME=${2}
+
+apt update && apt upgrade -y
+apt install jq
+
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  -o - -L | bash
+
+p2=$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+
+proxy_app=tcp://127.0.0.1:$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+rpc_port=$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+pprof_laddr=localhost:$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+p2p=tcp://0.0.0.0:$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+prometheus_listen_addr=:$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+address=0.0.0.0:$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+second_address=0.0.0.0:$(curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/function/port | bash)
+cd ; cd .$PROJECT/config
+sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"$proxy_app\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://0.0.0.0:$rpc_port\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"$pprof_laddr\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"$p2p\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \"$prometheus_listen_addr\"%" config.toml && \
+sed -i.bak -e "s%^address = \"0.0.0.0:9090\"%address = \"$address\"%; s%^address = \"0.0.0.0:9091\"%address = \"$second_address\"%" app.toml && \
+
+$SERVICENAME config node http://localhost:$rpc_port
