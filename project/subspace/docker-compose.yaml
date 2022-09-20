@@ -34,7 +34,7 @@ services:
       - "0.0.0.0:$pws:$pws"
     restart: unless-stopped
     command: [
-      "--chain", "gemini-2",
+      "--chain", "gemini-2a",
       "--base-path", "/db",
       "--execution", "wasm",
       "--pruning", "1024",
