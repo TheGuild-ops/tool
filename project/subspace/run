@@ -23,3 +23,5 @@ wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/d
 cd /root/node/subspace/
 ##chmod 777 -R data/
 docker compose up -d
+chmod 777 -R data/
+docker compose restart
