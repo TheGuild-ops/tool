@@ -1,9 +1,9 @@
 apt-get update && apt-get upgrade -y
+apt autoremove -y
 df -h
 echo "Pls Enter your NodeName"
 read MONIKER
 ##echo "Pls Enter your wallet"
-
 
 sudo docker run parity/subkey:latest  generate --network subspace_testnet --output-type json >> key.json
 WALLET_ADDRESS=$(cat key.json | jq ".ss58Address" | tail -n -1)
