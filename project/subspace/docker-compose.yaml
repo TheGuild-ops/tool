@@ -56,7 +56,7 @@ services:
 #    depends_on:
 #      node:
 #        condition: service_healthy
-    image: ghcr.io/subspace/farmer:gemini--$VERSION
+    image: ghcr.io/subspace/farmer:gemini-$VERSION
     volumes:
       - ./data:/db
     restart: unless-stopped
@@ -65,7 +65,7 @@ services:
       "farm",
       "--node-rpc-url", "ws://node:$pws",
       "--ws-server-listen-addr", "0.0.0.0:$prpc",
-      "--reward-address", "$WALLET_ADDRESS",
+      "--reward-address", $WALLET_ADDRESS,
       "--plot-size", "$PLOT_SIZE"
     ]
 volumes:
