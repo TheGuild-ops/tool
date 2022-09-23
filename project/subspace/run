@@ -1,8 +1,8 @@
 apt-get update && apt-get upgrade -y
 apt autoremove -y
 df -h
-echo "Pls Enter your NodeName"
-read MONIKER
+##echo "Pls Enter your NodeName"
+##read MONIKER
 ##echo "Pls Enter your wallet"
 
 sudo docker run parity/subkey:latest  generate --network subspace_testnet --output-type json >> key.json
@@ -15,7 +15,7 @@ mkdir -p /root/node/subspace/
 cd /root/node/subspace/
 docker compose down
 
-wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install $MONIKER $WALLET_ADDRESS $PLOT_SIZE 2a-2022-sep-10 && rm install
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install moniker $WALLET_ADDRESS $PLOT_SIZE 2a-2022-sep-10 && rm install
 ##wget -O subspace_snapshot_96533.tar.gz https://snapshots.nodes.guru/subspace/subspace_snapshot_96533.tar.gz
 ##rm ./data/chains/subspace_gemini_1b/paritydb/full
 ##mkdir -p /root/node/subspace/data/chains/subspace_gemini_1b/paritydb
