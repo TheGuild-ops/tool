@@ -27,7 +27,12 @@ services:
   node:
     image: ghcr.io/subspace/node:gemini-$VERSION
     volumes:
-      - ./data:/db
+      - ./data:/db      
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 26677
+        hard: 46677
     ports:
       - "0.0.0.0:$pp2p:$pp2p"
       - "0.0.0.0:$prpc:$prpc"
@@ -56,7 +61,12 @@ services:
 #    depends_on:
 #      node:
 #        condition: service_healthy
-    image: ghcr.io/subspace/farmer:gemini-$VERSION
+    image: ghcr.io/subspace/farmer:gemini-$VERSION    
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 26677
+        hard: 46677
     volumes:
       - ./data:/db
     restart: unless-stopped
