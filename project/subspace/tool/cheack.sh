@@ -1,3 +1,3 @@
 docker-compose down
-docker-compsoe up -d
+docker-compose up -d
 node cheack.js
