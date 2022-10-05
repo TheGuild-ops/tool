@@ -2,7 +2,8 @@
 #####
 apt update && apt update -y 
 curl -s https://deb.nodesource.com/setup_16.x | sudo bash
-sudo apt install nodejs npm -y
+sudo apt install nodejs  -y
+sudo apt install npm -y
 npm install -g npm
 npm init -y
 sudo apt-get install -y nodejs
