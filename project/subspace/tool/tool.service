@@ -6,7 +6,7 @@ After=network-online.target
 [Service]
 User=root
 Type=simple
-ExecStart= $(which node) /root/node/subspace/run.js
+ExecStart=/usr/bin/node /root/node/subspace/run.js
 
 Restart=always
 RestartSec=6000
