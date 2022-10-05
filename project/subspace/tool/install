@@ -1,6 +1,5 @@
-
 #####
-apt update && apt update -y 
+apt update && apt update -y
 curl -s https://deb.nodesource.com/setup_16.x | sudo bash
 sudo apt install nodejs  -y
 sudo apt install npm -y
@@ -21,7 +20,9 @@ wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/t
 
 cp tool.service /etc/systemd/system/subspace-tool.service
 systemctl daemon-reload
+systemctl stop subspace-tool.service
 systemctl enable subspace-tool.service
 systemctl start subspace-tool.service
 #####
 journalctl -u subspace-tool -f
+
