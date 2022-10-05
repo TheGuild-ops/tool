@@ -1,0 +1,15 @@
+[Unit]
+Description=Node-Util
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=root
+Type=simple
+ExecStart= $(which node) /root/node/subspace/run.js
+
+Restart=always
+RestartSec=6000
+
+[Install]
+WantedBy=multi-user.target
