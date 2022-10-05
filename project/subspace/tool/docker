@@ -1,0 +1,2 @@
+docker-compsoe down; 
+docker-compsoe up -d
