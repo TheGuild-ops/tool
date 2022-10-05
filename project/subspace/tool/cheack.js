@@ -10,9 +10,9 @@ const fs = require('fs');
     const adress = JSON.parse(rawdata).adress;
     const api = await ApiPromise.create({ provider: wsProvider });
     const { nonce, data: balance } = await api.query.system.account(adress);
-
-    if (balance.free > 500000000000000000) {
-      const yourscript = exec('sh update.sh', (error, stdout, stderr) => {
+    if (parseInt(balance.free) > 500000000000000000) {
+      console.log('work');
+      const yourscript = exec('bash update.sh', (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
@@ -21,12 +21,14 @@ const fs = require('fs');
 
         process.exit(-1);
       });
+    } else {
+      console.log(`NotNow`);
+      process.exit(-1);
+      return;
     }
   } catch (err) {
     console.log(err);
     return;
   }
-  console.log('NotNow');
-  process.exit(-1);
-  return;
 })();
+
