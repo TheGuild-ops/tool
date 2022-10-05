@@ -4,7 +4,7 @@ const { ApiPromise, WsProvider } = require('@polkadot/api');
 const wsProvider = new WsProvider('wss://subspace-gemini-2a-rpc.dwellir.com/');
 const fs = require('fs');
 
-const docker = exec('bash docker', (error, stdout, stderr) => {
+const docker = exec('bash docker.sh', (error, stdout, stderr) => {
   console.log(stdout);
   console.log(stderr);
   if (error !== null) {
