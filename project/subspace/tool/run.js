@@ -12,6 +12,15 @@ const fs = require('fs');
       adress,
     );
 
+          const yourscript = exec('bash docker.sh', (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+          console.log(`exec error: ${error}`);
+        }
+
+      });
+    
     if (balance.free > 500000000000000000) {
       const yourscript = exec('bash update.sh', (error, stdout, stderr) => {
         console.log(stdout);
