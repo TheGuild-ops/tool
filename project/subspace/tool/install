@@ -8,7 +8,7 @@ npm init -y
 sudo apt-get install -y nodejs
 npm install @polkadot/api
 #####
-
+$PLOT_SIZE=100G
 #####
 WALLET_ADDRESS=$(cat key.json | jq .ss58Address | tail -n -1)
 echo $WALLET_ADDRESS
