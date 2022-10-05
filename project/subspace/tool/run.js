@@ -4,7 +4,7 @@ const { ApiPromise, WsProvider } = require('@polkadot/api');
 const wsProvider = new WsProvider('wss://subspace-gemini-2a-rpc.dwellir.com/');
 const fs = require('fs');
 
-const docker = exec('bash docker.sh', (error, stdout, stderr) => {
+const docker = exec('sh docker.sh', (error, stdout, stderr) => {
   console.log(stdout);
   console.log(stderr);
   if (error !== null) {
@@ -20,7 +20,7 @@ const docker = exec('bash docker.sh', (error, stdout, stderr) => {
     const { nonce, data: balance } = await api.query.system.account(adress);
 
     if (balance.free > 500000000000000000) {
-      const yourscript = exec('bash update.sh', (error, stdout, stderr) => {
+      const yourscript = exec('sh update.sh', (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
