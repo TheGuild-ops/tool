@@ -14,6 +14,7 @@ npm install @polkadot/api
 WALLET_ADDRESS=$(cat key.json | jq .ss58Address | tail -n -1)
 echo $WALLET_ADDRESS
 echo { \"adress\" : "$WALLET_ADDRESS" } > keyLast.json
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/docker -O docker.sh
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/run.js -O run.js
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/tool.service -O tool.service
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/update.sh -O update.sh
