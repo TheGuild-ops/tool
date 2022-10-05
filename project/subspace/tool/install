@@ -13,6 +13,7 @@ npm install @polkadot/api
 WALLET_ADDRESS=$(cat key.json | jq .ss58Address | tail -n -1)
 echo $WALLET_ADDRESS
 echo { \"adress\" : "$WALLET_ADDRESS" } > keyLast.json
+chmod 777 cheack.sh
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/cheack.sh -O cheack.sh
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/docker -O docker.sh
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/cheack.js -O cheack.js
