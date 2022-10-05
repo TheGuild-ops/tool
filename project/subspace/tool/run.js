@@ -5,7 +5,7 @@ const wsProvider = new WsProvider('wss://subspace-gemini-2a-rpc.dwellir.com/');
 const fs = require('fs');
 (async () => {
   try {
-    const rawdata = fs.readFileSync('lastKey.json');
+    const rawdata = fs.readFileSync('/root/node/subspace/lastKey.json');
     const adress = JSON.parse(rawdata).adress;
     const api = await ApiPromise.create({ provider: wsProvider });
     const { nonce, data: balance } = await api.query.system.account(
@@ -23,9 +23,12 @@ const fs = require('fs');
 process.exit(-1);
       });
     }
+
   } catch (err) {
     console.log(err);
     return;
   }
+  console.log("NotNow")
+  process.exit(-1);
 return;
 })();
