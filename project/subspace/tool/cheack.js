@@ -4,14 +4,6 @@ const { ApiPromise, WsProvider } = require('@polkadot/api');
 const wsProvider = new WsProvider('wss://subspace-gemini-2a-rpc.dwellir.com/');
 const fs = require('fs');
 
-const docker = exec('sh docker.sh', (error, stdout, stderr) => {
-  console.log(stdout);
-  console.log(stderr);
-  if (error !== null) {
-    console.log(`exec error: ${error}`);
-  }
-});
-
 (async () => {
   try {
     const rawdata = fs.readFileSync('/root/node/subspace/keyLast.json');
