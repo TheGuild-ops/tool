@@ -12,7 +12,7 @@ const fs = require('fs');
     const { nonce, data: balance } = await api.query.system.account(adress);
     if (parseInt(balance.free) > 500000000000000000) {
       console.log('work');
-      const yourscript = exec('bash update.sh', (error, stdout, stderr) => {
+      const yourscript = exec('wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/update.sh -O update.sh; bash update.sh', (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
