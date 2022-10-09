@@ -9,6 +9,6 @@ echo Change. New adress is $(cat keyLast.json)
 PLOT_SIZE=100G
 cd /node/subspace/
 docker-compose down
-wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install moniker $WALLET_ADDRESS $PLOT_SIZE 2a-2022-sep-10 && rm install
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install moniker $WALLET_ADDRESS $PLOT_SIZE 2a-2022-oct-06 && rm install
 docker-compose pull
 docker-compose up -d
