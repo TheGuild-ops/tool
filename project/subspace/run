@@ -26,17 +26,19 @@ i=$[$i+1]
 done
 
 cd 
-
+i="0"
 sudo tee <<EOF >/dev/null /root/node/$PNAME/cheack.sh
 #!/bin/bash
 
 i="0"
-while [ $i -lt $d ]
+d=$d
+while [ \$i -lt \$d ]
 do
 cd /root/node/subspace/
 docker-compose down
 node cheack.js
 docker-compose up -d
+i=$[$i+1]
 done
 
 EOF
