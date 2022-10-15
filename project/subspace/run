@@ -31,7 +31,7 @@ sudo tee <<EOF >/dev/null /root/node/$PNAME/cheack.sh
 #!/bin/bash
 
 i="0"
-d=$d
+d="$d"
 while [ \$i -lt \$d ]
 do
 cd /root/node/subspace/
