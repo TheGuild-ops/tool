@@ -1,27 +1,25 @@
 apt-get update && apt-get upgrade -y
 apt autoremove -y
 df -h
-##echo "Pls Enter your NodeName"
-##read MONIKER
-##echo "Pls Enter your wallet"
-
-sudo docker run parity/subkey:latest  generate --network subspace_testnet --output-type json >> key.json
-WALLET_ADDRESS=$(cat key.json | jq ".ss58Address" | tail -n -1)
-##echo "Enter plot size in gigabytes or terabytes, for instance 100G or 2T"
 PLOT_SIZE=100G
 
-curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  -o - -L | bash
-mkdir -p /root/node/subspace/
-cd /root/node/subspace/
+i="0"
+echo "enter how many?"
+read d
+while [ $i -lt $d ]
+do
+sudo docker run parity/subkey:latest  generate --network subspace_testnet --output-type json >> key.json
+WALLET_ADDRESS=$(cat key.json | jq ".ss58Address" | tail -n -1)
+mkdir -p /root/node/subspace/$i
+cd /root/node/subspace/$i
 docker compose down
-
-wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install moniker $WALLET_ADDRESS $PLOT_SIZE 2a-2022-sep-10 && rm install
-##wget -O subspace_snapshot_96533.tar.gz https://snapshots.nodes.guru/subspace/subspace_snapshot_96533.tar.gz
-##rm ./data/chains/subspace_gemini_1b/paritydb/full
-##mkdir -p /root/node/subspace/data/chains/subspace_gemini_1b/paritydb
-##tar xvf subspace_snapshot_96533.tar.gz -C  /root/node/subspace/data/chains/subspace_gemini_1b/paritydb
-cd /root/node/subspace/
-##chmod 777 -R data/
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install moniker $WALLET_ADDRESS $PLOT_SIZE 2a-2022-sep-10 $i && rm install
 docker compose up -d
 chmod 777 -R data/
 docker compose restart
+
+i=$[$i+1]
+echo $i
+done
+
+curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  -o - -L | bash
