@@ -2,6 +2,7 @@ MONIKER=${1}
 WALLET_ADDRESS=${2}
 PLOT_SIZE=${3}
 VERSION=${4}
+NUMBER=${5}
 
 function portAssign {
  port=$((10000 + $RANDOM % 100000))
