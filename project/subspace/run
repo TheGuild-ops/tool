@@ -8,6 +8,21 @@ VER=2a-2022-oct-06
 i="0"
 echo "enter how many?"
 read d
+mkdir -p /root/node/subspace/
+cd /root/node/subspace/
+
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/cheack.sh -O cheack.sh
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/docker -O docker.sh
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/cheack.js -O cheack.js
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/tool.service -O tool.service
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/update.sh -O update.sh
+chmod 777 cheack.sh
+chmod 777 update.sh
+
+cp tool.service /etc/systemd/system/subspace-tool.service
+
+
+
 while [ $i -lt $d ]
 do
 mkdir -p /root/node/subspace/$i
@@ -18,7 +33,7 @@ echo { \"adress\" : "$WALLET_ADDRESS" } > keyLast.json
 
 docker compose down
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install moniker $WALLET_ADDRESS $PLOT_SIZE $VER $i && rm install
-
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/tool/update.sh
 docker compose up -d
 chmod 777 -R data/
 docker compose restart
@@ -35,9 +50,9 @@ i="0"
 d="$d"
 while [ \$i -lt \$d ]
 do
-cd /root/node/subspace/
+cd /root/node/subspace/\$i
 docker-compose down
-node cheack.js
+node /root/node/subspace/cheack.js \$i
 docker-compose up -d
 i=\$[\$i+1]
 done
@@ -45,4 +60,13 @@ done
 EOF
 
 
+
+
+
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  -o - -L | bash
+systemctl daemon-reload
+systemctl stop subspace-tool.service
+systemctl enable subspace-tool.service
+systemctl start subspace-tool.service
+#####
+journalctl -u subspace-tool -f
