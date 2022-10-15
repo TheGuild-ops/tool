@@ -38,7 +38,7 @@ cd /root/node/subspace/
 docker-compose down
 node cheack.js
 docker-compose up -d
-i=$[$i+1]
+i=\$[\$i+1]
 done
 
 EOF
