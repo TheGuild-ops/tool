@@ -2,6 +2,7 @@ apt-get update && apt-get upgrade -y
 apt autoremove -y
 df -h
 PLOT_SIZE=100G
+PNAME=subspace
 
 i="0"
 echo "enter how many?"
@@ -16,12 +17,29 @@ echo { \"adress\" : "$WALLET_ADDRESS" } > keyLast.json
 
 docker compose down
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/docker-compose.yaml -O install && bash install moniker $WALLET_ADDRESS $PLOT_SIZE 2a-2022-sep-10 $i && rm install
+
 docker compose up -d
 chmod 777 -R data/
 docker compose restart
 
 i=$[$i+1]
-echo $i
 done
+
+cd 
+
+sudo tee <<EOF >/dev/null /root/node/$PNAME/cheack.sh
+#!/bin/bash
+
+i="0"
+while [ $i -lt $d ]
+do
+cd /root/node/subspace/
+docker-compose down
+node cheack.js
+docker-compose up -d
+done
+
+EOF
+
 
 curl https://raw.githubusercontent.com/TheGuild-ops/tool/main/install/firewall  -o - -L | bash
