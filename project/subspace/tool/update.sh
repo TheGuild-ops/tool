@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NUM=${1}
-cd /node/subspace/$NUM
+cd /root/node/subspace/$NUM
 
 KEY=$(docker run parity/subkey:latest  generate --network subspace_testnet --output-type json)
 echo $KEY >> key.json
