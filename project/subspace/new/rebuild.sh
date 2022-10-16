@@ -1,5 +1,6 @@
 NUM=${1}
 VERSION=${2}
+MONIKER=${3}
 
 function portAssign {
  port=$((10000 + $RANDOM % 100000))
@@ -49,5 +50,38 @@ services:
       "--rpc-methods", "safe",
       "--unsafe-ws-external",
       "--validator",
-
+      "--name", "$MONIKER"
+    ]
+    healthcheck:
+      timeout: 5s
+      interval: 30s
+      retries: 5
 EOF
+
+for (( i=0; i <= $NUM; i++ ))
+do
+adress=$(cat /root/node/subspace/keyLast.json | jq .[$i].adress)
+if [[ $adress ]]
+then
+echo farmer:
+
+echo image: ghcr.io/subspace/farmer:gemini-$VERSION
+echo ulimits: >> docker-compose.yaml
+echo   nproc: 65535 >> docker-compose.yaml
+echo   nofile: >> docker-compose.yaml
+echo     soft: 26677 >> docker-compose.yaml
+echo     hard: 46677 >> docker-compose.yaml
+echo  volumes: >> docker-compose.yaml
+echo   - ./data:/db >> docker-compose.yaml
+echo restart: unless-stopped >> docker-compose.yaml
+echo command: [ >> docker-compose.yaml
+echo "--base-path", "/db/farmer", >> docker-compose.yaml
+echo "farm", >> docker-compose.yaml
+echo "--node-rpc-url", "ws://node:$pws", >> docker-compose.yaml
+echo "--ws-server-listen-addr", "0.0.0.0:$prpc", >> docker-compose.yaml
+echo "--reward-address", $WALLET_ADDRESS, >> docker-compose.yaml
+echo "--plot-size", "$PLOT_SIZE" >> docker-compose.yaml
+echo ] >> docker-compose.yaml
+fi
+done
+
