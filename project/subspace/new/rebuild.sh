@@ -1,6 +1,8 @@
+#!/bin/bash
 NUM=${1}
 VERSION=${2}
 MONIKER=${3}
+PLOT_SIZE=${4}
 
 function portAssign {
  port=$((10000 + $RANDOM % 100000))
@@ -58,30 +60,32 @@ services:
       retries: 5
 EOF
 
+tmp="volumes:\n   node-data:"
 for (( i=0; i <= $NUM; i++ ))
 do
-adress=$(cat /root/node/subspace/keyLast.json | jq .[$i].adress)
-if [[ $adress ]]
-then
-echo farmer:
+adress=$(cat /root/node/subspace/1/keyLast.json | jq .[$i].adress)
 
-echo image: ghcr.io/subspace/farmer:gemini-$VERSION
-echo ulimits: >> docker-compose.yaml
-echo   nproc: 65535 >> docker-compose.yaml
-echo   nofile: >> docker-compose.yaml
-echo     soft: 26677 >> docker-compose.yaml
-echo     hard: 46677 >> docker-compose.yaml
-echo  volumes: >> docker-compose.yaml
-echo   - ./data:/db >> docker-compose.yaml
-echo restart: unless-stopped >> docker-compose.yaml
-echo command: [ >> docker-compose.yaml
-echo "--base-path", "/db/farmer", >> docker-compose.yaml
-echo "farm", >> docker-compose.yaml
-echo "--node-rpc-url", "ws://node:$pws", >> docker-compose.yaml
-echo "--ws-server-listen-addr", "0.0.0.0:$prpc", >> docker-compose.yaml
-echo "--reward-address", $WALLET_ADDRESS, >> docker-compose.yaml
-echo "--plot-size", "$PLOT_SIZE" >> docker-compose.yaml
-echo ] >> docker-compose.yaml
+if [ "$adress" != "null" ]
+ then
+  echo '  farmer-'$i':'>> docker-compose.yaml
+  echo '    image: ghcr.io/subspace/farmer:gemini-'$VERSION >> docker-compose.yaml
+  echo '    ulimits: '>> docker-compose.yaml
+  echo '       nproc: 65535 '>> docker-compose.yaml
+  echo '       nofile: '>> docker-compose.yaml
+  echo '         soft: 26677 '>> docker-compose.yaml
+  echo '         hard: 46677 '>> docker-compose.yaml
+  echo '    volumes: '>> docker-compose.yaml
+  echo '      - ./data-'$i':/db '>> docker-compose.yaml
+  echo '    restart: unless-stopped '>> docker-compose.yaml
+  echo '    command: [ '>> docker-compose.yaml
+  echo '      "--base-path", "/db/farmer", '>> docker-compose.yaml
+  echo '      "farm", '>> docker-compose.yaml
+  echo '      "--node-rpc-url", "ws://node:'$pws'", '>> docker-compose.yaml
+  echo '      "--ws-server-listen-addr", "0.0.0.0:'$prpc'", '>> docker-compose.yaml
+  echo '      "--reward-address", '$adress', '>> docker-compose.yaml
+  echo '      "--plot-size", "'$PLOT_SIZE'" '>> docker-compose.yaml
+  echo '   ] '>> docker-compose.yaml
+  tmp="$tmp\n  farmer-$i-data:"
 fi
 done
-
+echo -e $tmp >> docker-compose.yaml
