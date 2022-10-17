@@ -44,7 +44,7 @@ wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/n
 
 docker-compose down
 ##node $PPATH/cheack.js
-bash $PPATH/rebuild.sh COUNT VERSION VALIDATOR_NAME SUBSPACE_PLOT_SIZE
+bash $PPATH/rebuild.sh $COUNT $VERSION $VALIDATOR_NAME $SUBSPACE_PLOT_SIZE
 ##docker-compose up -d
 
 
