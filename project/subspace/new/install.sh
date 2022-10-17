@@ -1,6 +1,11 @@
 #!/bin/bash
 PNAME=subspace
-PATH=$HOME/node/$PNAME
+PPATH=$HOME/node/$PNAME
+apt update && apt upgrade -y
+apt autoremove -y
+cd
+mkdir $PPATH -p
+cd $PPATH
 
 while getopts n:p:a:c:v: flag
 do
@@ -33,16 +38,13 @@ then
   echo "Enter farmer count"
   read COUNT
 fi
-apt update && apt update -y
-cd
-mkdir $PATH -p
-cd $PATH
+
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/cheack.js -O cheack.js
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/rebuild.sh -O rebuild.sh
 
 docker-compose down
-##node $PATH/cheack.js
-bash $PATH/rebuild.sh COUNT VERSION VALIDATOR_NAME SUBSPACE_PLOT_SIZE
+##node $PPATH/cheack.js
+bash $PPATH/rebuild.sh COUNT VERSION VALIDATOR_NAME SUBSPACE_PLOT_SIZE
 ##docker-compose up -d
 
 
