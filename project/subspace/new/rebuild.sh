@@ -63,7 +63,7 @@ EOF
 tmp="volumes:\n   node-data:"
 for (( i=0; i <= $NUM; i++ ))
 do
-adress=$(cat /root/node/subspace/1/keyLast.json | jq .[$i].adress)
+adress=$(cat ./keyLast.json | jq .[$i].adress)
 
 if [ "$adress" != "null" ]
  then
