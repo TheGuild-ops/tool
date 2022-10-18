@@ -9,7 +9,7 @@ const fs = require('fs');
 
 (async () => {
   try {
-    const lastAddressRaw = fs.readFileSync(`./keyLast.json`);
+    const lastAddressRaw = fs.readFileSync(`keyLast.json`);
     const lastAddress = JSON.parse(lastAddressRaw);
     const api = await ApiPromise.create({ provider: wsProvider });
     const start = Date.now();
@@ -31,13 +31,13 @@ const fs = require('fs');
           { ss58Format: 2254 },
         );
 
-        let rawdata = fs.readFileSync('./key.json');
+        let rawdata = fs.readFileSync('key.json');
         const wallet = JSON.parse(rawdata);
         console.log(wallet);
         wallet.push({ mnemonic: mnemonic, address: pair.address });
         const dataWalelt = JSON.stringify(wallet);
         try {
-          fs.writeFileSync('./key.json', dataWalelt);
+          fs.writeFileSync('key.json', dataWalelt);
           // file written successfully
         } catch (err) {
           console.error(err);
@@ -46,7 +46,7 @@ const fs = require('fs');
       }
       const dataAddress = JSON.stringify(lastAddress);
       try {
-        fs.writeFileSync('./keyLast.json', dataAddress);
+        fs.writeFileSync('keyLast.json', dataAddress);
         // file written successfully
       } catch (err) {
         console.error(err);
