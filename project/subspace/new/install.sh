@@ -48,10 +48,6 @@ bash $PPATH/rebuild.sh $COUNT $VERSION $VALIDATOR_NAME $SUBSPACE_PLOT_SIZE
 node $PPATH/rebuild.js $COUNT
 EOF
 
-docker-compose down
-docker-compose up -d
-chmod 777 -R data*
-docker-compose restart
 systemctl daemon-reload
 systemctl enable node_util
 systemctl start node_util
