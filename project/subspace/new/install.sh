@@ -41,14 +41,16 @@ fi
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/cheack.js -O cheack.js
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/rebuild.sh -O rebuild.sh
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/subspace_util.service -O /etc/systemd/system/subspace_util.service
-chmod +x $PPATH/run.sh
 
 cat << EOF > $PPATH/run.sh
 #!/bin/bash
 bash $PPATH/rebuild.sh $COUNT $VERSION $VALIDATOR_NAME $SUBSPACE_PLOT_SIZE
 node $PPATH/rebuild.js $COUNT
+
 EOF
 
+chmod +x $PPATH/run.sh
+systemctl stop subspace_util.service
 systemctl daemon-reload
 systemctl enable subspace_util.service
 systemctl start subspace_util.service
