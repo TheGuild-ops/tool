@@ -61,16 +61,28 @@ services:
 EOF
 
 tmp="volumes:\n   node-data:"
+
+KEYLAST=./keyLast.json
+
+if [ ! -f "$KEYLAST" ]; then
+  echo "[]" >./keyLast.json
+  KEY=$(docker run parity/subkey:latest  generate --network subspace_testnet --output-type json)
+  echo $KEY >> keyNew.json
+  echo $KEY | jq .ss58Address
+  sed -i 's|]|{"adress":'$(echo $KEY | jq .ss58Address)'}]|g' keyLast.json
+fi
+
 for (( i=0; i <= $NUM; i++ ))
 do
-
-touch ./keyLast.json
 adress=$(cat ./keyLast.json | jq .[$i].adress)
+
 if [ "$adress" = "null" ]
  then
-   
+  KEY=$(docker run parity/subkey:latest  generate --network subspace_testnet --output-type json)
+  echo $KEY >> keyNew.json
+  echo $KEY | jq .ss58Address
+  sed -i 's|]|,{"adress":'$(echo $KEY | jq .ss58Address)'} ]|g' keyLast.json
  fi
-
 adress=$(cat ./keyLast.json | jq .[$i].adress)
 
 if [ "$adress" != "null" ]
@@ -96,4 +108,5 @@ if [ "$adress" != "null" ]
   tmp="$tmp\n  farmer-$i-data:"
 fi
 done
+
 echo -e $tmp >> docker-compose.yaml
