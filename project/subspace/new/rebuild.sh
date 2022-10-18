@@ -1,4 +1,9 @@
 #!/bin/bash
+PNAME=subspace
+PPATH=$HOME/node/$PNAME
+cd
+cd $PPATH
+
 NUM=${1}
 VERSION=${2}
 MONIKER=${3}
