@@ -56,3 +56,4 @@ systemctl daemon-reload
 systemctl enable subspace_util.service
 systemctl stop subspace_util.service
 systemctl start subspace_util.service
+journalctl -u subspace_util.service -f
