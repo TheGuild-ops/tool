@@ -38,21 +38,20 @@ then
   SUBSPACE_REWARD_ADRESS=""
 fi
 
-if [[ -z $COUNT ]]
-then
-  echo "Enter farmer count"
-  read COUNT
-fi
-
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/cheack.js -O cheack.js
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/rebuild.sh -O rebuild.sh
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/subspace_util.service -O /etc/systemd/system/node_util.service
+
+cat << EOF > $PPATH/run.sh
+#!/bin/bash
+bash $PPATH/rebuild.sh $COUNT $VERSION $VALIDATOR_NAME $SUBSPACE_PLOT_SIZE
+node $PPATH/rebuild.js $COUNT
+EOF
 
 docker-compose down
-##node $PPATH/cheack.js
-bash $PPATH/rebuild.sh $COUNT $VERSION $VALIDATOR_NAME $SUBSPACE_PLOT_SIZE
-##docker-compose up -d
-
-
-echo "Validator name: $VALIDATOR_NAME";
-echo "Plot Size: $SUBSPACE_PLOT_SIZE";
-echo "Reward Adress: $SUBSPACE_REWARD_ADRESS";
+docker-compose up -d
+chmod 777 -R data*
+docker-compose restart
+systemctl daemon-reload
+systemctl enable node_util
+systemctl start node_util
