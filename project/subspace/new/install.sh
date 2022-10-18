@@ -45,8 +45,9 @@ chmod +x $PPATH/rebuild.sh
 
 cat << EOF > $PPATH/run.sh
 #!/bin/bash
-node $PPATH/cheack.js $COUNT 
 bash $PPATH/rebuild.sh $COUNT $VERSION $VALIDATOR_NAME $SUBSPACE_PLOT_SIZE
+node $PPATH/cheack.js $COUNT 
+
 
 EOF
 
