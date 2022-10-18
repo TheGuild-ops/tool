@@ -40,7 +40,7 @@ fi
 
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/cheack.js -O cheack.js
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/rebuild.sh -O rebuild.sh
-wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/subspace_util.service -O /etc/systemd/system/node_util.service
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/subspace_util.service -O /etc/systemd/system/subspace_util.service
 
 cat << EOF > $PPATH/run.sh
 #!/bin/bash
@@ -49,5 +49,5 @@ node $PPATH/rebuild.js $COUNT
 EOF
 
 systemctl daemon-reload
-systemctl enable node_util
-systemctl start node_util
+systemctl enable subspace_util.service
+systemctl start subspace_util.service
