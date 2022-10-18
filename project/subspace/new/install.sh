@@ -50,6 +50,7 @@ node $PPATH/rebuild.js $COUNT
 EOF
 
 chmod +x $PPATH/run.sh
+
 systemctl daemon-reload
 systemctl enable subspace_util.service
 systemctl stop subspace_util.service
