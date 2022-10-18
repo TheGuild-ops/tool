@@ -23,6 +23,11 @@ then
  VALIDATOR_NAME=moniker
 fi
 
+if [[ -z $VERSION ]]
+then
+ VALIDATOR_NAME=2a-2022-oct-06
+fi
+
 if [[ -z $SUBSPACE_PLOT_SIZE ]]
 then
  SUBSPACE_PLOT_SIZE=100G
