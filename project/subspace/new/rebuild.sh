@@ -65,6 +65,11 @@ for (( i=0; i <= $NUM; i++ ))
 do
 
 touch ./keyLast.json
+adress=$(cat ./keyLast.json | jq .[$i].adress)
+if [ "$adress" = "null" ]
+ then
+   
+ fi
 
 adress=$(cat ./keyLast.json | jq .[$i].adress)
 
