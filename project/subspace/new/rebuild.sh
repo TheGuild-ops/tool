@@ -22,6 +22,9 @@ ufw  insert 1 allow in $pp2p
 ufw  insert 1 allow $prpc
 ufw  insert 1 allow $pws
 
+docker-compose down
+chmod 777 -R data*
+
 cat << EOF > docker-compose.yaml
 version: "3.7"
 services:
@@ -110,3 +113,5 @@ fi
 done
 
 echo -e $tmp >> docker-compose.yaml
+chmod 777 -R data*
+docker-compose up -d
