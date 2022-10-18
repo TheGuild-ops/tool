@@ -41,6 +41,7 @@ fi
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/cheack.js -O cheack.js
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/rebuild.sh -O rebuild.sh
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/subspace_util.service -O /etc/systemd/system/subspace_util.service
+chmod +x $PPATH/run.sh
 
 cat << EOF > $PPATH/run.sh
 #!/bin/bash
