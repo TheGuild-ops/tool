@@ -63,6 +63,9 @@ EOF
 tmp="volumes:\n   node-data:"
 for (( i=0; i <= $NUM; i++ ))
 do
+
+touch ./keyLast.json
+
 adress=$(cat ./keyLast.json | jq .[$i].adress)
 
 if [ "$adress" != "null" ]
