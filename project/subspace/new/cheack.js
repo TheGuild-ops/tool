@@ -13,17 +13,17 @@ const fs = require('fs');
     const lastAddress = JSON.parse(lastAddressRaw);
     const api = await ApiPromise.create({ provider: wsProvider });
     const start = Date.now();
-    console.log(start);
+    let i = 0;
+    console.log(lastAddress);
     lastAddress.forEach(async (element) => {
       const { nonce, data: balance } = await api.query.system.account(
         element.adress,
       );
-
+      console.log(parseInt(balance.free));
       if (parseInt(balance.free) > 500000000000000000) {
         console.log(parseInt(balance.free));
         const keyring = new Keyring({ type: 'sr25519', ss58Format: 2254 });
         const mnemonic = mnemonicGenerate();
-
         const pair = keyring.addFromUri(
           mnemonic,
           { name: 'first pair' },
@@ -31,9 +31,8 @@ const fs = require('fs');
           { ss58Format: 2254 },
         );
 
-        let rawdata = fs.readFileSync('key.json');
+        let rawdata = fs.readFileSync('key.json', {encoding:'utf8', flag:'r'});
         const wallet = JSON.parse(rawdata);
-        console.log(wallet);
         wallet.push({ mnemonic: mnemonic, address: pair.address });
         const dataWalelt = JSON.stringify(wallet);
         try {
@@ -42,8 +41,9 @@ const fs = require('fs');
         } catch (err) {
           console.error(err);
         }
-        return (element.adress = pair.address);
+        element.adress = pair.address;
       }
+
       const dataAddress = JSON.stringify(lastAddress);
       try {
         fs.writeFileSync('keyLast.json', dataAddress);
@@ -51,11 +51,13 @@ const fs = require('fs');
       } catch (err) {
         console.error(err);
       }
+      console.log(i);
+      if (++i == lastAddress.length) process.exit(-1);
+      return element
     });
-
+    console.log(lastAddress);
   } catch (err) {
     console.log(err);
-    return;
   }
-  process.exit(-1);
+  //
 })();
