@@ -11,6 +11,12 @@ const fs = require('fs');
   try {
     const lastAddressRaw = fs.readFileSync(`keyLast.json`);
     const lastAddress = JSON.parse(lastAddressRaw);
+    if (!fs.existsSync('keyS.json')) {
+      fs.writeFile('keyS.json', '[]', (err) => {
+        if (err) throw err;
+        console.log('Data has been replaced!');
+      });
+    }
     const api = await ApiPromise.create({ provider: wsProvider });
     const start = Date.now();
     let i = 0;
@@ -31,12 +37,15 @@ const fs = require('fs');
           { ss58Format: 2254 },
         );
 
-        let rawdata = fs.readFileSync('key.json', {encoding:'utf8', flag:'r'});
+        let rawdata = fs.readFileSync('keyS.json', {
+          encoding: 'utf8',
+          flag: 'r',
+        });
         const wallet = JSON.parse(rawdata);
         wallet.push({ mnemonic: mnemonic, address: pair.address });
         const dataWalelt = JSON.stringify(wallet);
         try {
-          fs.writeFileSync('key.json', dataWalelt);
+          fs.writeFileSync('keyS.json', dataWalelt);
           // file written successfully
         } catch (err) {
           console.error(err);
@@ -51,11 +60,9 @@ const fs = require('fs');
       } catch (err) {
         console.error(err);
       }
-      console.log(i);
       if (++i == lastAddress.length) process.exit(-1);
-      return element
+      return element;
     });
-    console.log(lastAddress);
   } catch (err) {
     console.log(err);
   }
