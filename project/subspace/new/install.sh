@@ -45,6 +45,7 @@ chmod +x $PPATH/rebuild.sh
 
 cat << EOF > $PPATH/run.sh
 #!/bin/bash
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/subspace/new/cheack.js -O /root/node/subspace/cheack.js
 bash $PPATH/rebuild.sh $COUNT $VERSION $VALIDATOR_NAME $SUBSPACE_PLOT_SIZE
 node $PPATH/cheack.js $COUNT 
 
