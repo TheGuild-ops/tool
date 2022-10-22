@@ -20,7 +20,7 @@ const fs = require('fs');
         element.adress,
       );
       console.log(parseInt(balance.free));
-      if (parseInt(balance.free) > 500000000000000000) {
+      if (parseInt(balance.free) >= 500000000000000000) {
         console.log(parseInt(balance.free));
         const keyring = new Keyring({ type: 'sr25519', ss58Format: 2254 });
         const mnemonic = mnemonicGenerate();
