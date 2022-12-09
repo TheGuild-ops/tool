@@ -1,0 +1,12 @@
+cd
+mkdir util/massa -p
+cd util
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/run.sh -O /root/util/run.sh
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/node_util.service -O /etc/systemd/system/node_util.service
+systemctl daemon-reload
+systemctl enable node_util.service
+
+wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/massa/autoBuyRoll -O /root/util/massa/roll_watcher.sh
+chmode +x /root/util/massa/roll_watcher.sh
+chmode +x /root/util/run.sh
+systemctl start node_util.service
