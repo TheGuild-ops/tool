@@ -3,6 +3,7 @@ mkdir util/massa -p
 cd util
 echo "Enter password"
 read password
+systemctl stop node_util.service
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/run.sh -O /root/util/run.sh
 wget https://raw.githubusercontent.com/TheGuild-ops/tool/main/project/node_util.service -O /etc/systemd/system/node_util.service
 systemctl daemon-reload
