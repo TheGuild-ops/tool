@@ -1,0 +1,14 @@
+[Unit]
+Description=Node-Util
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=root
+Type=simple
+ExecStart=/root/util/run.sh
+Restart=always
+RestartSec=600
+
+[Install]
+WantedBy=multi-user.target
