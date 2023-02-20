@@ -1,0 +1,8 @@
+
+ironfish faucet
+ironfish wallet:balance
+ironfish wallet:mint
+ironfish wallet:burn
+echo 'Wallet'
+echo dfc2679369551e64e3950e06a88e68466e813c63b100283520045925adbe59ca
+ironfish wallet:send
