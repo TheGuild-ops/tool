@@ -1,5 +1,3 @@
 
-
-
-https://github.com/TheGuild-ops/tool/assets/79193549/44084756-e655-4c3f-9a06-cfb5821499aa
+https://lh3.googleusercontent.com/u/2/drive-viewer/AFGJ81rG6I3zGEM84G41E6kyOIS8oMIqBK1g0YIOAHewvI6gcFKjj_TQvzMQGKlbgiN-o94KmWT6qH4g3QHO8IXYoFq_4GD22g=w1212-h1208
 
